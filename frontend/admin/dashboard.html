@@ -70,7 +70,8 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#" onclick="window.NearStage.logout(); return false;"><i
+                                <li><a class="dropdown-item" href="#"
+                                        onclick="window.NearStage.logout(); return false;"><i
                                             class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
                             </ul>
                         </div>
@@ -263,7 +264,48 @@
                 }
 
             } catch (error) {
-                console.error('Error:', error);
+                console.warn('API connection failed. Loading Demo Data...');
+                // Mock system statistics
+                document.getElementById('totalStudents').textContent = '1,245';
+                document.getElementById('totalCompanies').textContent = '86';
+                document.getElementById('pendingCompanies').textContent = '12';
+                document.getElementById('totalInternships').textContent = '358';
+                document.getElementById('totalApplications').textContent = '2,890';
+                document.getElementById('acceptedApplications').textContent = '412';
+                document.getElementById('rejectedApplications').textContent = '156';
+                document.getElementById('placementRate').textContent = '24%';
+
+                // Mock pending companies
+                const pendingContainer = document.getElementById('pendingCompaniesList');
+                pendingContainer.innerHTML = [
+                    { name: 'Kigali Tech Solutions', email: 'hr@kigalitech.rw' },
+                    { name: 'Rwanda Agro-Trade', email: 'admin@rwagro.com' }
+                ].map(c => `
+                    <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                      <div>
+                        <strong>${c.name}</strong>
+                        <br><small class="text-muted">${c.email}</small>
+                      </div>
+                      <div>
+                        <button class="btn btn-sm btn-success me-1" onclick="window.NearStage.showToast('Demo: Company Approved')"><i class="fas fa-check"></i></button>
+                        <button class="btn btn-sm btn-danger" onclick="window.NearStage.showToast('Demo: Company Rejected')"><i class="fas fa-times"></i></button>
+                      </div>
+                    </div>
+                `).join('');
+
+                // Mock distribution
+                const fieldContainer = document.getElementById('fieldDistribution');
+                fieldContainer.innerHTML = [
+                    { name: 'Computer Science', count: '450' },
+                    { name: 'Agriculture', count: '320' },
+                    { name: 'Civil Engineering', count: '280' },
+                    { name: 'Business Admin', count: '210' }
+                ].map(f => `
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <span>${f.name}</span>
+                      <span class="badge bg-primary">${f.count}</span>
+                    </div>
+                `).join('');
             }
         }
 
