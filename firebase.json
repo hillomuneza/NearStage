@@ -6,14 +6,11 @@
       "**/.*",
       "**/node_modules/**"
     ],
+    "cleanUrls": true,
     "rewrites": [
       {
         "source": "/api/**",
         "function": "api"
-      },
-      {
-        "source": "**",
-        "destination": "/index.html"
       }
     ],
     "headers": [
@@ -38,7 +35,14 @@
     ]
   },
   "functions": {
-    "source": "backend"
+    "source": ".",
+    "ignore": [
+      "frontend/**",
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "codebase": "default"
   },
   "emulators": {
     "functions": {

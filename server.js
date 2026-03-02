@@ -75,16 +75,29 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
 });
 
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+
+// Initialize Firebase Admin (optional, but good practice)
+if (admin.apps.length === 0) {
+    admin.initializeApp();
+}
+
+// ... existing code ...
+
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error('Error:', err);
     res.status(500).json({ message: 'Something went wrong!' });
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`🚀 RIAPMS Server running on port ${PORT}`);
-    console.log(`📱 API available at http://localhost:${PORT}/api`);
-});
+// Export as Firebase Function
+exports.api = functions.https.onRequest(app);
 
-module.exports = app;
+// Start server locally (if not running as a function)
+if (process.env.NODE_ENV !== 'production' || !process.env.FIREBASE_CONFIG) {
+    app.listen(PORT, () => {
+        console.log(`🚀 RIAPMS Server running on port ${PORT}`);
+        console.log(`📱 API available at http://localhost:${PORT}/api`);
+    });
+}
