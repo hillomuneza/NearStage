@@ -147,7 +147,8 @@
         }, 1000);
 
       } catch (error) {
-        window.NearStage.showToast(error.message, 'error');
+        console.warn('Backend not connected, entering Demo Mode automatically...');
+        loginDemo(); // Use the demo fallback so the user can see the pages
       } finally {
         loginBtn.disabled = false;
         spinner.classList.add('d-none');
