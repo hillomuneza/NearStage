@@ -124,7 +124,21 @@
                             <i class="fas fa-user-check"></i>
                         </div>
                         <div class="stat-number" id="acceptedApplicants">0</div>
-                        <div class="stat-label">Accepted</div>
+                        <div class="stat-label">Joined Students</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Practicing Students -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="dashboard-card border-top border-4 border-success">
+                        <h4><i class="fas fa-user-clock me-2 text-success"></i>Current Practicing Students</h4>
+                        <div id="practicingStudentsList">
+                            <div class="text-center py-4">
+                                <p class="text-muted">Finding joined interns...</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -239,7 +253,38 @@
                 console.warn('API connection failed. Loading Company Demo Data...');
                 document.getElementById('totalPosts').textContent = '4';
                 document.getElementById('totalApplicants').textContent = '28';
-                document.getElementById('acceptedApplicants').textContent = '2';
+                document.getElementById('acceptedApplicants').textContent = '3';
+
+                // Practicing Students Mock Data
+                const practicingContainer = document.getElementById('practicingStudentsList');
+                practicingContainer.innerHTML = `
+                    <div class="table-responsive">
+                      <table class="table align-middle">
+                        <thead class="table-light">
+                          <tr>
+                            <th>Student</th>
+                            <th>Joining Date</th>
+                            <th>Practice Focus (Learning)</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><strong>Mugisha Patrick</strong><br><small class="text-muted">UR - Science & Technology</small></td>
+                            <td>Jan 15, 2026</td>
+                            <td><span class="badge bg-info-subtle text-info">Full Stack Development</span><br><small>Building Company Portal</small></td>
+                            <td><span class="badge bg-success">Actively Practicing</span></td>
+                          </tr>
+                          <tr>
+                            <td><strong>Uwase Jeannette</strong><br><small class="text-muted">Akilah Institute</small></td>
+                            <td>Feb 01, 2026</td>
+                            <td><span class="badge bg-info-subtle text-info">Digital Marketing</span><br><small>Social Media Strategy</small></td>
+                            <td><span class="badge bg-success">Actively Practicing</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                `;
 
                 const container = document.getElementById('applicantsList');
                 container.innerHTML = `
