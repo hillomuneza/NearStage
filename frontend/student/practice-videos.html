@@ -25,8 +25,11 @@
 <body>
     <!-- Background Video Container -->
     <div class="video-background">
-        <video autoplay muted loop id="bgVideo">
-            <source src="" type="video/mp4" id="bgVideoSource">
+        <video autoplay muted loop id="bgVideo"
+            poster="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1920&q=80">
+            <source
+                src="https://assets.mixkit.co/videos/preview/mixkit-business-people-having-a-meeting-in-a-modern-office-228-large.mp4"
+                type="video/mp4" id="bgVideoSource">
         </video>
         <div class="video-overlay"></div>
     </div>
@@ -75,7 +78,8 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#" onclick="window.NearStage.logout(); return false;"><i
+                                <li><a class="dropdown-item" href="#"
+                                        onclick="window.NearStage.logout(); return false;"><i
                                             class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
                             </ul>
                         </div>
