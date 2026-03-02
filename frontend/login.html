@@ -64,10 +64,13 @@
           <label class="form-check-label" for="rememberMe">Remember me</label>
         </div>
 
-        <div class="d-grid">
+        <div class="d-grid gap-2">
           <button type="submit" class="btn btn-primary btn-lg" id="loginBtn">
             <span class="spinner-border spinner-border-sm me-2 d-none" role="status"></span>
             Login
+          </button>
+          <button type="button" class="btn btn-outline-secondary" onclick="loginDemo()">
+            <i class="fas fa-desktop me-2"></i> Try Demo Mode
           </button>
         </div>
       </form>
@@ -135,11 +138,11 @@
         const userRole = result.user.role || role;
         setTimeout(() => {
           if (userRole === 'admin' || userRole === 'super_admin') {
-            window.location.href = 'admin/dashboard.html';
+            window.location.href = '/admin/dashboard.html';
           } else if (userRole === 'company') {
-            window.location.href = 'company/dashboard.html';
+            window.location.href = '/company/dashboard.html';
           } else {
-            window.location.href = 'student/dashboard.html';
+            window.location.href = '/student/dashboard.html';
           }
         }, 1000);
 
@@ -163,6 +166,26 @@
         emailInput.placeholder = 'your@email.com';
       }
     });
+    // Demo Login Bypass
+    function loginDemo() {
+      const role = document.getElementById('userRole').value;
+      const demoUser = {
+        name: 'Demo User',
+        email: 'demo@nearstage.com',
+        role: role
+      };
+
+      window.NearStage.setToken('demo_token_123');
+      window.NearStage.setUser(demoUser);
+
+      window.NearStage.showToast('Entering Demo Mode...', 'info');
+
+      setTimeout(() => {
+        if (role === 'admin') window.location.href = '/admin/dashboard.html';
+        else if (role === 'company') window.location.href = '/company/dashboard.html';
+        else window.location.href = '/student/dashboard.html';
+      }, 1000);
+    }
   </script>
 </body>
 

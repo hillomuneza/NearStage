@@ -1,7 +1,7 @@
 // NearStage Main JavaScript
 
 // API Base URL
-const API_URL = 'https://nearstage.com/api';
+const API_URL = '/api';
 
 // Store token
 const getToken = () => localStorage.getItem('riapms_token');
@@ -22,7 +22,7 @@ const isLoggedIn = () => !!getToken();
 // Redirect if not logged in
 const requireAuth = () => {
     if (!isLoggedIn()) {
-        window.location.href = 'login.html';
+        window.location.href = '/login.html';
         return false;
     }
     return true;
@@ -48,15 +48,26 @@ async function apiCall(endpoint, method = 'GET', data = null) {
 
     try {
         const response = await fetch(`${API_URL}${endpoint}`, options);
-        const result = await response.json();
+        let result;
+
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            result = await response.json();
+        } else {
+            const text = await response.text();
+            result = { message: text || response.statusText };
+        }
 
         if (!response.ok) {
-            throw new Error(result.message || 'Something went wrong');
+            throw new Error(result.message || result.error || 'Something went wrong');
         }
 
         return result;
     } catch (error) {
         console.error('API Error:', error);
+        if (error.name === 'TypeError' && error.message === 'Failed to fetch') {
+            throw new Error('Unable to connect to the server. Please ensure the backend is running.');
+        }
         throw error;
     }
 }
@@ -147,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function logout() {
     removeToken();
     removeUser();
-    window.location.href = 'index.html';
+    window.location.href = '/index.html';
 }
 
 // Format date

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#2563eb">
   <title>Student Registration - NearStage</title>
-  
+
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="assets/icon-192.png">
-  
+
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
@@ -18,7 +19,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css">
-  
+
   <style>
     .skill-tag {
       display: inline-block;
@@ -31,16 +32,19 @@
       cursor: pointer;
       transition: var(--transition);
     }
+
     .skill-tag:hover {
       background: var(--primary);
       color: var(--white);
     }
+
     .skill-tag.selected {
       background: var(--primary);
       color: var(--white);
     }
   </style>
 </head>
+
 <body class="auth-page">
   <div class="auth-card" style="max-width: 600px;">
     <div class="auth-header">
@@ -52,7 +56,7 @@
       <form id="registerForm">
         <!-- Personal Info -->
         <h5 class="mb-3"><i class="fas fa-user me-2"></i>Personal Information</h5>
-        
+
         <div class="row">
           <div class="col-md-6 mb-3">
             <label class="form-label">Full Name *</label>
@@ -71,13 +75,14 @@
           </div>
           <div class="col-md-6 mb-3">
             <label class="form-label">Password *</label>
-            <input type="password" class="form-control" id="password" placeholder="Min 6 characters" required minlength="6">
+            <input type="password" class="form-control" id="password" placeholder="Min 6 characters" required
+              minlength="6">
           </div>
         </div>
 
         <!-- Education Info -->
         <h5 class="mb-3 mt-4"><i class="fas fa-graduation-cap me-2"></i>Education Information</h5>
-        
+
         <div class="row">
           <div class="col-md-6 mb-3">
             <label class="form-label">School/University *</label>
@@ -103,7 +108,7 @@
 
         <!-- Location -->
         <h5 class="mb-3 mt-4"><i class="fas fa-map-marker-alt me-2"></i>Location</h5>
-        
+
         <div class="row">
           <div class="col-md-6 mb-3">
             <label class="form-label">Province *</label>
@@ -137,11 +142,14 @@
           </label>
         </div>
 
-        <div class="d-grid">
+        <div class="d-grid gap-2">
           <button type="submit" class="btn btn-primary btn-lg" id="registerBtn">
             <span class="spinner-border spinner-border-sm me-2 d-none" role="status"></span>
             Create Account
           </button>
+          <a href="/login.html" class="btn btn-outline-secondary">
+            <i class="fas fa-eye me-2"></i> Preview Dashboard (Demo)
+          </a>
         </div>
       </form>
     </div>
@@ -157,7 +165,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Custom JS -->
   <script src="js/main.js"></script>
-  
+
   <script>
     // Populate fields
     const fieldSelect = document.getElementById('field');
@@ -178,10 +186,10 @@
     });
 
     // Handle province change
-    provinceSelect.addEventListener('change', function() {
+    provinceSelect.addEventListener('change', function () {
       const districtSelect = document.getElementById('district');
       districtSelect.innerHTML = '<option value="">Select district</option>';
-      
+
       if (this.value && window.NearStage.districtsByProvince[this.value]) {
         window.NearStage.districtsByProvince[this.value].forEach(district => {
           const option = document.createElement('option');
@@ -198,7 +206,7 @@
     // Skills handling
     const selectedSkills = new Set();
     const skillsContainer = document.getElementById('skillsContainer');
-    
+
     window.NearStage.skillsList.slice(0, 15).forEach(skill => {
       const tag = document.createElement('span');
       tag.className = 'skill-tag';
@@ -218,7 +226,7 @@
     }
 
     // Custom skill input
-    document.getElementById('customSkill').addEventListener('keypress', function(e) {
+    document.getElementById('customSkill').addEventListener('keypress', function (e) {
       if (e.key === 'Enter') {
         e.preventDefault();
         const skill = this.value.trim();
@@ -237,7 +245,7 @@
     // Registration form
     document.getElementById('registerForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
@@ -251,7 +259,7 @@
 
       const registerBtn = document.getElementById('registerBtn');
       const spinner = registerBtn.querySelector('.spinner-border');
-      
+
       registerBtn.disabled = true;
       spinner.classList.remove('d-none');
 
@@ -271,16 +279,16 @@
           },
           bio
         });
-        
+
         window.NearStage.setToken(result.token);
         window.NearStage.setUser(result.user);
-        
+
         window.NearStage.showToast('Registration successful! Redirecting to dashboard...');
-        
+
         setTimeout(() => {
-          window.location.href = 'student/dashboard.html';
+          window.location.href = '/student/dashboard.html';
         }, 1500);
-        
+
       } catch (error) {
         window.NearStage.showToast(error.message, 'error');
       } finally {
@@ -290,4 +298,5 @@
     });
   </script>
 </body>
+
 </html>
