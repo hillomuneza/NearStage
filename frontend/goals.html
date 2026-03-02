@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="RIAPMS Goals - Our strategic objectives for transforming internship placement in Rwanda.">
+    <meta name="theme-color" content="#2563eb">
+    <title>Our Goals - RIAPMS</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icon-192.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .goals-hero {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .goals-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200') center/cover;
+            opacity: 0.1;
+        }
+
+        .goal-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 5px solid #2563eb;
+        }
+
+        .goal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .goal-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .goal-card h3 {
+            color: #1e293b;
+            margin-bottom: 15px;
+        }
+
+        .goal-card p {
+            color: #64748b;
+            margin: 0;
+        }
+
+        .timeline-section {
+            padding: 80px 0;
+            background: #f8faff;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 50px;
+            padding-bottom: 40px;
+            border-left: 3px solid #e2e8f0;
+        }
+
+        .timeline-item:last-child {
+            border-left: 3px solid transparent;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #2563eb;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px #2563eb;
+        }
+
+        .timeline-year {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2563eb;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .vision-section {
+            padding: 80px 0;
+        }
+
+        .vision-card {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+            border-radius: 30px;
+            padding: 60px;
+            color: white;
+            text-align: center;
+        }
+
+        .vision-card h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .vision-card p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/logo-square.svg" alt="RIAPMS Logo" height="35" class="me-2">
+                <span class="d-none d-md-inline">RIAPMS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="mission.html">Mission</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="goals.html">Goals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-outline-light btn-sm" href="login.html">
+                            <i class="fas fa-sign-in-alt me-1"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <div class="dropdown">
+                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown">
+                                <i class="fas fa-user-plus me-1"></i> Register
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="register-student.html">Student</a></li>
+                                <li><a class="dropdown-item" href="register-company.html">Company</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Goals Hero -->
+    <section class="goals-hero">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center text-white">
+                    <h1 class="display-3 fw-bold mb-4">Our Strategic Goals</h1>
+                    <p class="lead fs-4">Building a sustainable future for Rwanda's youth through internship excellence
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Statement -->
+    <section class="py-5">
+        <div class="container">
+            <div class="vision-card mb-5">
+                <h2>Our Vision</h2>
+                <p>To become the leading internship placement platform in Africa, connecting every Rwandan student with
+                    meaningful career opportunities that contribute to national development.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategic Goals -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <span class="section-subtitle">What We Aim For</span>
+                    <h2 class="section-title">Strategic Objectives</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="goal-card">
+                        <div class="goal-number">1</div>
+                        <h3>Expand National Coverage</h3>
+                        <p>Ensure every student in Rwanda—regardless of location—has access to quality internship
+                            opportunities. We're expanding to all 30 districts and partnering with universities across
+                            the country.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="goal-card">
+                        <div class="goal-number">2</div>
+                        <h3>Industry Partnerships</h3>
+                        <p>Build strong relationships with 500+ companies across all sectors including technology,
+                            agriculture, healthcare, finance, and tourism to provide diverse internship opportunities.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="goal-card">
+                        <div class="goal-number">3</div>
+                        <h3>Technology Innovation</h3>
+                        <p>Continuously improve our AI matching algorithm to ensure better student-company matches.
+                            Implement new features like skills assessment, virtual interviews, and progress tracking.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="goal-card">
+                        <div class="goal-number">4</div>
+                        <h3>Placement Success Rate</h3>
+                        <p>Achieve a 90% successful placement rate by improving our matching system, providing career
+                            guidance, and ensuring companies meet their commitment to interns.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="goal-card">
+                        <div class="goal-number">5</div>
+                        <h3>Student Support Services</h3>
+                        <p>Provide comprehensive support including resume building, interview preparation, and career
+                            counseling to help students succeed in their internships and future careers.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="goal-card">
+                        <div class="goal-number">6</div>
+                        <h3>Data-Driven Decisions</h3>
+                        <p>Utilize analytics to understand internship trends, identify gaps, and make informed decisions
+                            that benefit students and employers alike.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <span class="section-subtitle">Our Journey</span>
+                    <h2 class="section-title">Roadmap to Success</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="timeline-item">
+                        <div class="timeline-year">Phase 1 - 2024</div>
+                        <h4>Foundation</h4>
+                        <p class="text-muted">Launch the platform, establish core partnerships with 50 companies, and
+                            register 5,000 students across major universities.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">Phase 2 - 2025</div>
+                        <h4>Expansion</h4>
+                        <p class="text-muted">Expand to all provinces, grow to 200+ companies, implement AI matching,
+                            and achieve 1,000 successful placements.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">Phase 3 - 2026</div>
+                        <h4>Excellence</h4>
+                        <p class="text-muted">Reach 500+ company partners, achieve 90% placement success rate, launch
+                            mobile app, and expand to regional markets.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">Phase 4 - 2027+</div>
+                        <h4>Pan-African Leadership</h4>
+                        <p class="text-muted">Become the leading internship platform in Africa, sharing our model with
+                            other countries and continuously innovating.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h2>Be Part of Our Journey</h2>
+                    <p>Join students and companies already achieving their goals with RIAPMS</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a href="register-student.html" class="btn btn-light btn-lg me-2">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4><img src="assets/logo-square.svg" alt="RIAPMS" height="35" class="me-2">RIAPMS</h4>
+                    <p class="text-muted mb-3">Rwanda Internship & Academic Placement Management System</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="mission.html">Mission</a></li>
+                        <li><a href="goals.html">Goals</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Contact Us</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt me-2"></i>Kigali, Rwanda</li>
+                        <li><i class="fas fa-envelope me-2"></i>info@riapms.gov.rw</li>
+                        <li><i class="fas fa-phone me-2"></i>+250 788 000 000</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom text-center">
+                <p class="mb-0">&copy; 2024 RIAPMS. All rights reserved. Rwanda Internship & Academic Placement
+                    Management System</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

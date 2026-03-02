@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>Practice Videos - RIAPMS</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../assets/icon-192.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <!-- Background Video Container -->
+    <div class="video-background">
+        <video autoplay muted loop id="bgVideo">
+            <source src="" type="video/mp4" id="bgVideoSource">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-graduation-cap me-2"></i>RIAPMS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-home me-1"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="internships.html">
+                            <i class="fas fa-briefcase me-1"></i> Browse Internships
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="applications.html">
+                            <i class="fas fa-file-alt me-1"></i> My Applications
+                        </a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-light dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown">
+                                <div class="user-avatar"
+                                    style="width: 32px; height: 32px; display: inline-flex; margin-right: 8px;">
+                                    <span id="userInitials">JD</span>
+                                </div>
+                                <span id="userName">Student</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="profile.html"><i
+                                            class="fas fa-user me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="settings.html"><i
+                                            class="fas fa-cog me-2"></i>Settings</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" onclick="window.RIAPMS.logout(); return false;"><i
+                                            class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Practice Videos Content -->
+    <div class="dashboard-content">
+        <div class="container">
+            <!-- Video Controls -->
+            <div class="dashboard-card mb-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3><i class="fas fa-video me-2 text-primary"></i>Practice Videos</h3>
+                        <p class="text-muted mb-0">Watch training and practice videos from your internship</p>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-primary" onclick="toggleBackgroundVideo()">
+                            <i class="fas fa-play me-2"></i>Play Background Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Background Video Player -->
+            <div class="dashboard-card mb-4" id="backgroundVideoSection" style="display: none;">
+                <h4><i class="fas fa-desktop me-2 text-primary"></i>Background Video Display</h4>
+                <p class="text-muted">Display this video during training sessions to show students their practice
+                    highlights.</p>
+
+                <div class="position-relative rounded overflow-hidden mb-3" style="height: 400px; background: #000;">
+                    <video id="displayVideo" class="w-100 h-100" controls>
+                        <source src="" type="video/mp4" id="displayVideoSource">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button class="btn btn-success" onclick="playFullscreen()">
+                        <i class="fas fa-expand me-2"></i>Fullscreen
+                    </button>
+                    <button class="btn btn-secondary" onclick="loopVideo()">
+                        <i class="fas fa-redo me-2"></i>Loop
+                    </button>
+                    <button class="btn btn-danger" onclick="stopVideo()">
+                        <i class="fas fa-stop me-2"></i>Stop
+                    </button>
+                </div>
+            </div>
+
+            <!-- Video Upload for Trainers -->
+            <div class="dashboard-card mb-4">
+                <h4><i class="fas fa-upload me-2 text-primary"></i>Upload Practice Video</h4>
+                <p class="text-muted">Trainers can upload practice videos for students to watch.</p>
+
+                <div class="mb-3">
+                    <label class="form-label">Video Title</label>
+                    <input type="text" class="form-control" id="videoTitle" placeholder="Enter video title">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" id="videoDescription" rows="2"
+                        placeholder="Describe this practice video"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Select Video File</label>
+                    <input type="file" class="form-control" id="videoFile" accept="video/*">
+                    <small class="text-muted">Supported formats: MP4, WebM, Ogg (Max 100MB)</small>
+                </div>
+
+                <button class="btn btn-primary" onclick="uploadVideo()">
+                    <i class="fas fa-cloud-upload-alt me-2"></i>Upload Video
+                </button>
+            </div>
+
+            <!-- Video Gallery -->
+            <div class="dashboard-card mb-4">
+                <h4><i class="fas fa-film me-2 text-primary"></i>Video Gallery</h4>
+
+                <div class="row g-4" id="videoGallery">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="video-card">
+                            <div class="video-thumbnail" onclick="playVideo('demo')">
+                                <i class="fas fa-play-circle fa-3x"></i>
+                            </div>
+                            <div class="video-info">
+                                <h6>Internship Orientation</h6>
+                                <p class="text-muted mb-1">Introduction to internship program</p>
+                                <small class="text-muted">Duration: 5:30</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="video-card">
+                            <div class="video-thumbnail" onclick="playVideo('demo2')">
+                                <i class="fas fa-play-circle fa-3x"></i>
+                            </div>
+                            <div class="video-info">
+                                <h6>Professional Skills Training</h6>
+                                <p class="text-muted mb-1">Communication and workplace skills</p>
+                                <small class="text-muted">Duration: 12:45</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="video-card">
+                            <div class="video-thumbnail" onclick="playVideo('demo3')">
+                                <i class="fas fa-play-circle fa-3x"></i>
+                            </div>
+                            <div class="video-info">
+                                <h6>Technical Skills Workshop</h6>
+                                <p class="text-muted mb-1">Industry-specific technical training</p>
+                                <small class="text-muted">Duration: 25:00</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Playlist -->
+            <div class="dashboard-card">
+                <h4><i class="fas fa-list me-2 text-primary"></i>Recommended Videos</h4>
+
+                <div class="list-group list-group-flush" id="videoPlaylist">
+                    <div class="list-group-item d-flex justify-content-between align-items-center"
+                        onclick="selectVideo(0)" style="cursor: pointer;">
+                        <div>
+                            <i class="fas fa-play-circle me-2 text-primary"></i>
+                            <span>1. Getting Started with Your Internship</span>
+                        </div>
+                        <span class="badge bg-primary rounded-pill">5:30</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center"
+                        onclick="selectVideo(1)" style="cursor: pointer;">
+                        <div>
+                            <i class="fas fa-play-circle me-2 text-primary"></i>
+                            <span>2. Workplace Communication Skills</span>
+                        </div>
+                        <span class="badge bg-primary rounded-pill">8:15</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center"
+                        onclick="selectVideo(2)" style="cursor: pointer;">
+                        <div>
+                            <i class="fas fa-play-circle me-2 text-primary"></i>
+                            <span>3. Time Management Tips</span>
+                        </div>
+                        <span class="badge bg-primary rounded-pill">6:45</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center"
+                        onclick="selectVideo(3)" style="cursor: pointer;">
+                        <div>
+                            <i class="fas fa-play-circle me-2 text-primary"></i>
+                            <span>4. Professional Etiquette</span>
+                        </div>
+                        <span class="badge bg-primary rounded-pill">10:20</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+
+    <script>
+        // Check authentication
+        if (!window.RIAPMS.requireAuth()) { }
+
+        // Load user data
+        const user = window.RIAPMS.getUser();
+        if (user) {
+            document.getElementById('userInitials').textContent = window.RIAPMS.getInitials(user.name || 'Student');
+            document.getElementById('userName').textContent = user.name || 'Student';
+        }
+
+        // Video state
+        let isLooping = false;
+        let currentVideoIndex = 0;
+
+        function toggleBackgroundVideo() {
+            const section = document.getElementById('backgroundVideoSection');
+            if (section.style.display === 'none') {
+                section.style.display = 'block';
+            } else {
+                section.style.display = 'none';
+            }
+        }
+
+        function playVideo(videoId) {
+            const section = document.getElementById('backgroundVideoSection');
+            section.style.display = 'block';
+
+            // In a real app, this would load the actual video
+            const video = document.getElementById('displayVideo');
+            window.RIAPMS.showToast('Video player ready - configure video source in backend', 'info');
+        }
+
+        function playFullscreen() {
+            const video = document.getElementById('displayVideo');
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+            } else if (video.msRequestFullscreen) {
+                video.msRequestFullscreen();
+            }
+        }
+
+        function loopVideo() {
+            isLooping = !isLooping;
+            const video = document.getElementById('displayVideo');
+            video.loop = isLooping;
+
+            if (isLooping) {
+                video.play();
+                window.RIAPMS.showToast('Video will loop continuously', 'success');
+            } else {
+                window.RIAPMS.showToast('Looping disabled', 'info');
+            }
+        }
+
+        function stopVideo() {
+            const video = document.getElementById('displayVideo');
+            video.pause();
+            video.currentTime = 0;
+            window.RIAPMS.showToast('Video stopped', 'info');
+        }
+
+        function selectVideo(index) {
+            currentVideoIndex = index;
+            const video = document.getElementById('displayVideo');
+
+            const videos = [
+                { title: 'Getting Started with Your Internship', duration: '5:30' },
+                { title: 'Workplace Communication Skills', duration: '8:15' },
+                { title: 'Time Management Tips', duration: '6:45' },
+                { title: 'Professional Etiquette', duration: '10:20' }
+            ];
+
+            // Show video section
+            document.getElementById('backgroundVideoSection').style.display = 'block';
+            window.RIAPMS.showToast(`Selected: ${videos[index].title}`, 'info');
+        }
+
+        async function uploadVideo() {
+            const title = document.getElementById('videoTitle').value;
+            const description = document.getElementById('videoDescription').value;
+            const fileInput = document.getElementById('videoFile');
+            const file = fileInput.files[0];
+
+            if (!title) {
+                window.RIAPMS.showToast('Please enter a video title', 'error');
+                return;
+            }
+
+            if (!file) {
+                window.RIAPMS.showToast('Please select a video file', 'error');
+                return;
+            }
+
+            // Check file size (100MB max)
+            if (file.size > 100 * 1024 * 1024) {
+                window.RIAPMS.showToast('File size must be less than 100MB', 'error');
+                return;
+            }
+
+            // Check file type
+            const validTypes = ['video/mp4', 'video/webm', 'video/ogg'];
+            if (!validTypes.includes(file.type)) {
+                window.RIAPMS.showToast('Please upload a valid video file (MP4, WebM, or Ogg)', 'error');
+                return;
+            }
+
+            // Convert to base64 for demo purposes
+            const reader = new FileReader();
+            reader.onload = async function (e) {
+                const videoData = e.target.result;
+
+                try {
+                    // In a real app, this would upload to a server/cloud storage
+                    window.RIAPMS.showToast('Video uploaded successfully!', 'success');
+
+                    // Clear form
+                    document.getElementById('videoTitle').value = '';
+                    document.getElementById('videoDescription').value = '';
+                    fileInput.value = '';
+
+                    // Add to gallery
+                    addVideoToGallery(title, description);
+                } catch (error) {
+                    console.error('Error uploading video:', error);
+                    window.RIAPMS.showToast('Failed to upload video', 'error');
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function addVideoToGallery(title, description) {
+            const gallery = document.getElementById('videoGallery');
+            const newVideo = document.createElement('div');
+            newVideo.className = 'col-md-6 col-lg-4';
+            newVideo.innerHTML = `
+        <div class="video-card">
+          <div class="video-thumbnail" onclick="playVideo('new')">
+            <i class="fas fa-play-circle fa-3x"></i>
+          </div>
+          <div class="video-info">
+            <h6>${title}</h6>
+            <p class="text-muted mb-1">${description || 'Custom upload'}</p>
+            <small class="text-muted">Just now</small>
+          </div>
+        </div>
+      `;
+            gallery.appendChild(newVideo);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function (e) {
+            const video = document.getElementById('displayVideo');
+
+            switch (e.key) {
+                case ' ':
+                    if (video.paused) video.play();
+                    else video.pause();
+                    e.preventDefault();
+                    break;
+                case 'f':
+                    playFullscreen();
+                    break;
+                case 'l':
+                    loopVideo();
+                    break;
+            }
+        });
+    </script>
+</body>
+
+</html>

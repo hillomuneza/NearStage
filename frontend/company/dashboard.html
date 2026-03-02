@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>Company Dashboard - RIAPMS</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../assets/icon-192.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-graduation-cap me-2"></i>RIAPMS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.html">
+                            <i class="fas fa-home me-1"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="post-internship.html">
+                            <i class="fas fa-plus-circle me-1"></i> Post Internship
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="my-internships.html">
+                            <i class="fas fa-list me-1"></i> My Posts
+                        </a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-light dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown">
+                                <div class="user-avatar"
+                                    style="width: 32px; height: 32px; display: inline-flex; margin-right: 8px;">
+                                    <span id="userInitials">CO</span>
+                                </div>
+                                <span id="userName">Company</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="profile.html"><i
+                                            class="fas fa-building me-2"></i>Company Profile</a></li>
+                                <li><a class="dropdown-item" href="settings.html"><i
+                                            class="fas fa-cog me-2"></i>Settings</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" onclick="window.RIAPMS.logout(); return false;"><i
+                                            class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-content">
+        <div class="container">
+            <!-- Welcome -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3>Welcome, <span id="welcomeName">Company</span>!</h3>
+                                <p class="text-muted mb-0">Manage your internship postings and applicants</p>
+                            </div>
+                            <a href="post-internship.html" class="btn btn-primary">
+                                <i class="fas fa-plus me-2"></i>Post New Internship
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(37, 99, 235, 0.1); color: #2563eb;">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="stat-number" id="totalPosts">0</div>
+                        <div class="stat-label">Total Posts</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-number" id="totalApplicants">0</div>
+                        <div class="stat-label">Total Applicants</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="stat-number" id="acceptedApplicants">0</div>
+                        <div class="stat-label">Accepted</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Applicants -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="dashboard-card">
+                        <h4><i class="fas fa-users me-2 text-primary"></i>Recent Applicants</h4>
+                        <div id="applicantsList">
+                            <div class="text-center py-4">
+                                <div class="spinner-border text-primary" role="status"></div>
+                                <p class="mt-2">Loading applicants...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+
+    <script>
+        if (!window.RIAPMS.requireAuth()) { }
+
+        const user = window.RIAPMS.getUser();
+        if (user) {
+            document.getElementById('userInitials').textContent = window.RIAPMS.getInitials(user.companyName || 'Company');
+            document.getElementById('userName').textContent = user.companyName || 'Company';
+            document.getElementById('welcomeName').textContent = user.companyName || 'Company';
+        }
+
+        async function loadDashboard() {
+            try {
+                const internships = await window.RIAPMS.apiCall('/internships/company/internships');
+
+                document.getElementById('totalPosts').textContent = internships.length;
+
+                let totalApplicants = 0;
+                let acceptedApplicants = 0;
+
+                // Get latest applicants from all internships
+                let allApplicants = [];
+                for (const internship of internships.slice(0, 3)) {
+                    const applicants = await window.RIAPMS.apiCall(`/internships/company/internship/${internship._id}/applicants`);
+                    totalApplicants += applicants.length;
+                    acceptedApplicants += applicants.filter(a => a.status === 'accepted').length;
+
+                    applicants.forEach(a => {
+                        a.internshipTitle = internship.title;
+                        a.internshipId = internship._id;
+                    });
+                    allApplicants = allApplicants.concat(applicants);
+                }
+
+                document.getElementById('totalApplicants').textContent = totalApplicants;
+                document.getElementById('acceptedApplicants').textContent = acceptedApplicants;
+
+                // Render recent applicants
+                const container = document.getElementById('applicantsList');
+
+                if (allApplicants.length === 0) {
+                    container.innerHTML = '<div class="text-center py-4"><p class="text-muted">No applicants yet</p></div>';
+                    return;
+                }
+
+                container.innerHTML = `
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>School</th>
+                  <th>Field</th>
+                  <th>Internship</th>
+                  <th>Match</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${allApplicants.slice(0, 5).map(a => {
+                    const student = a.studentId || {};
+                    let badgeClass = 'status-pending';
+                    if (a.status === 'accepted') badgeClass = 'status-accepted';
+                    if (a.status === 'rejected') badgeClass = 'status-rejected';
+
+                    return `
+                    <tr>
+                      <td>${student.name || 'N/A'}</td>
+                      <td>${student.school || 'N/A'}</td>
+                      <td>${student.field || 'N/A'}</td>
+                      <td>${a.internshipTitle}</td>
+                      <td><span class="match-badge ${a.matchScore >= 70 ? 'match-high' : a.matchScore >= 40 ? 'match-medium' : 'match-low'}">${a.matchScore}%</span></td>
+                      <td><span class="status-badge ${badgeClass}">${a.status}</span></td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-primary" onclick="viewApplicant('${a.internshipId}', '${student._id}')">View</button>
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function viewApplicant(internshipId, studentId) {
+            window.location.href = `applicant-details.html?internship=${internshipId}&student=${studentId}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDashboard);
+    </script>
+</body>
+
+</html>

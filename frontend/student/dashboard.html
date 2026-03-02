@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2563eb">
+  <title>Student Dashboard - RIAPMS</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="../manifest.json">
+  <link rel="apple-touch-icon" href="../assets/icon-192.png">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">
+        <i class="fas fa-graduation-cap me-2"></i>RIAPMS
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item">
+            <a class="nav-link active" href="dashboard.html">
+              <i class="fas fa-home me-1"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="internships.html">
+              <i class="fas fa-briefcase me-1"></i> Browse Internships
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="applications.html">
+              <i class="fas fa-file-alt me-1"></i> My Applications
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="practice-videos.html">
+              <i class="fas fa-video me-1"></i> Practice Videos
+            </a>
+          </li>
+          <li class="nav-item ms-3">
+            <div class="dropdown">
+              <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                <div class="user-avatar" style="width: 32px; height: 32px; display: inline-flex; margin-right: 8px;">
+                  <span id="userInitials">JD</span>
+                </div>
+                <span id="userName">John</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#" onclick="window.RIAPMS.logout(); return false;"><i
+                      class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dashboard Content -->
+  <div class="dashboard-content">
+    <div class="container">
+      <!-- Welcome Section -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="dashboard-card">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h3>Welcome back, <span id="welcomeName">Student</span>!</h3>
+                <p class="text-muted mb-0">Find your perfect internship opportunity in Rwanda</p>
+              </div>
+              <a href="internships.html" class="btn btn-primary">
+                <i class="fas fa-search me-2"></i>Find Internships
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="row g-4 mb-4">
+        <div class="col-md-4">
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(37, 99, 235, 0.1); color: #2563eb;">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="stat-number" id="matchedCount">0</div>
+            <div class="stat-label">Matched Internships</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="stat-number" id="appliedCount">0</div>
+            <div class="stat-label">Applications</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-number" id="acceptedCount">0</div>
+            <div class="stat-label">Accepted</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Matched Internships -->
+      <div class="row">
+        <div class="col-12">
+          <div class="dashboard-card">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h4><i class="fas fa-magic me-2 text-primary"></i>Smart Matched Internships</h4>
+              <a href="internships.html" class="btn btn-outline-primary btn-sm">View All</a>
+            </div>
+
+            <div id="matchedInternships">
+              <div class="text-center py-4">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="mt-2 text-muted">Loading matched internships...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <div class="dashboard-card">
+            <h4><i class="fas fa-user-circle me-2 text-primary"></i>Complete Your Profile</h4>
+            <p class="text-muted">Add more skills and upload your CV to improve your match rate.</p>
+            <a href="profile.html" class="btn btn-outline-primary">
+              <i class="fas fa-edit me-2"></i>Edit Profile
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="dashboard-card">
+            <h4><i class="fas fa-question-circle me-2 text-primary"></i>Need Help?</h4>
+            <p class="text-muted">Learn how RIAPMS matches you with the best internships.</p>
+            <a href="../index.html#how-it-works" class="btn btn-outline-primary">
+              <i class="fas fa-info-circle me-2"></i>How It Works
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- How to Connect with Companies -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="dashboard-card">
+            <h4><i class="fas fa-handshake me-2 text-success"></i>How to Connect with Companies</h4>
+            <p class="text-muted mb-4">Follow these steps to find and join a company for your internship:</p>
+
+            <div class="row g-4">
+              <div class="col-md-3">
+                <div class="text-center p-4 bg-light rounded">
+                  <div class="step-circle bg-primary text-white">1</div>
+                  <h6 class="mt-3">Browse Internships</h6>
+                  <p class="small text-muted mb-0">Go to "Browse Internships" and filter by your field, location, and
+                    skills</p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="text-center p-4 bg-light rounded">
+                  <div class="step-circle bg-primary text-white">2</div>
+                  <h6 class="mt-3">Find Opportunities</h6>
+                  <p class="small text-muted mb-0">Search through verified companies offering internships in your area
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="text-center p-4 bg-light rounded">
+                  <div class="step-circle bg-primary text-white">3</div>
+                  <h6 class="mt-3">Apply Online</h6>
+                  <p class="small text-muted mb-0">Submit your application with your CV. Companies review all
+                    applications</p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="text-center p-4 bg-light rounded">
+                  <div class="step-circle bg-success text-white">4</div>
+                  <h6 class="mt-3">Get Accepted</h6>
+                  <p class="small text-muted mb-0">Receive placement letter, then start your internship journey!</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 p-3 bg-success bg-opacity-10 rounded">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-lightbulb text-success fa-2x me-3"></i>
+                <div>
+                  <h6 class="mb-1">Pro Tips for Getting Hired</h6>
+                  <p class="small text-muted mb-0">✓ Complete your profile 100% | ✓ Upload a professional CV | ✓ Apply
+                    to multiple internships | ✓ Check your email regularly for updates</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 text-center">
+              <a href="internships.html" class="btn btn-success btn-lg">
+                <i class="fas fa-search me-2"></i>Start Finding Internships Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="../js/main.js"></script>
+
+  <script>
+    // Check authentication
+    if (!window.RIAPMS.requireAuth()) {
+      // Will redirect to login
+    }
+
+    // Load user data
+    const user = window.RIAPMS.getUser();
+    if (user) {
+      document.getElementById('userInitials').textContent = window.RIAPMS.getInitials(user.name || 'Student');
+      document.getElementById('userName').textContent = user.name || 'Student';
+      document.getElementById('welcomeName').textContent = user.name ? user.name.split(' ')[0] : 'Student';
+    }
+
+    // Load matched internships
+    async function loadMatchedInternships() {
+      try {
+        const internships = await window.RIAPMS.apiCall('/internships/student/matched');
+
+        document.getElementById('matchedCount').textContent = internships.length;
+
+        const container = document.getElementById('matchedInternships');
+
+        if (internships.length === 0) {
+          container.innerHTML = `
+            <div class="text-center py-4">
+              <i class="fas fa-search fa-3x text-muted mb-3"></i>
+              <p class="text-muted">No matched internships found. Complete your profile to get better matches!</p>
+              <a href="profile.html" class="btn btn-primary">Complete Profile</a>
+            </div>
+          `;
+          return;
+        }
+
+        // Show top 3 matches
+        const topInternships = internships.slice(0, 3);
+
+        container.innerHTML = topInternships.map(internship => {
+          const company = internship.companyId || {};
+          const matchScore = internship.matchScore || 0;
+          let matchBadgeClass = 'match-low';
+          if (matchScore >= 70) matchBadgeClass = 'match-high';
+          else if (matchScore >= 40) matchBadgeClass = 'match-medium';
+
+          return `
+            <div class="internship-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="d-flex gap-3">
+                  <div class="company-logo">
+                    <i class="fas fa-building"></i>
+                  </div>
+                  <div>
+                    <h5 class="mb-1">${internship.title}</h5>
+                    <div class="company-name">${company.companyName || 'Company'}</div>
+                    <div class="meta-info">
+                      <span><i class="fas fa-map-marker-alt"></i> ${internship.location?.district || ''}, ${internship.location?.province || ''}</span>
+                      <span><i class="fas fa-clock"></i> ${internship.duration || ''}</span>
+                      <span><i class="fas fa-book"></i> ${internship.field || ''}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-end">
+                  <span class="match-badge ${matchBadgeClass}">${matchScore}% Match</span>
+                </div>
+              </div>
+              <div class="mt-3">
+                <a href="internship-details.html?id=${internship._id}" class="btn btn-outline-primary btn-sm">View Details</a>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (error) {
+        console.error('Error loading internships:', error);
+        document.getElementById('matchedInternships').innerHTML = `
+          <div class="alert alert-warning">Unable to load internships. Please try again later.</div>
+        `;
+      }
+    }
+
+    // Load applications
+    async function loadApplications() {
+      try {
+        const applications = await window.RIAPMS.apiCall('/internships/student/applications');
+
+        document.getElementById('appliedCount').textContent = applications.length;
+
+        const acceptedCount = applications.filter(a => a.status === 'accepted').length;
+        document.getElementById('acceptedCount').textContent = acceptedCount;
+
+      } catch (error) {
+        console.error('Error loading applications:', error);
+      }
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      loadMatchedInternships();
+      loadApplications();
+    });
+  </script>
+</body>
+
+</html>

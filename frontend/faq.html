@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RIAPMS FAQ - Frequently asked questions about our internship placement platform.">
+    <meta name="theme-color" content="#2563eb">
+    <title>FAQ - RIAPMS</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icon-192.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .faq-hero {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            padding: 120px 0 60px;
+        }
+
+        .faq-section {
+            padding: 60px 0;
+        }
+
+        .faq-category {
+            margin-bottom: 40px;
+        }
+
+        .faq-category h3 {
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question h4 {
+            color: #1e293b;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .faq-question i {
+            color: #2563eb;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            display: none;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-answer p {
+            color: #64748b;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .faq-answer ul {
+            color: #64748b;
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .search-box {
+            background: white;
+            border-radius: 50px;
+            padding: 20px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-top: -30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .contact-box {
+            background: #f8faff;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/logo-square.svg" alt="RIAPMS Logo" height="35" class="me-2">
+                <span class="d-none d-md-inline">RIAPMS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="mission.html">Mission</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goals.html">Goals</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="faq.html">FAQ</a></li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-outline-light btn-sm" href="login.html">
+                            <i class="fas fa-sign-in-alt me-1"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <div class="dropdown">
+                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown">
+                                <i class="fas fa-user-plus me-1"></i> Register
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="register-student.html">Student</a></li>
+                                <li><a class="dropdown-item" href="register-company.html">Company</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- FAQ Hero -->
+    <section class="faq-hero">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center text-white">
+                    <h1 class="display-4 fw-bold mb-3">Frequently Asked Questions</h1>
+                    <p class="lead">Find answers to common questions about RIAPMS</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="faq-section">
+        <div class="container">
+            <!-- Search Box -->
+            <div class="search-box mb-5">
+                <input type="text" placeholder="Search for questions..." id="faqSearch">
+            </div>
+
+            <!-- General Questions -->
+            <div class="faq-category">
+                <h3><i class="fas fa-question-circle me-2"></i>General Questions</h3>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>What is RIAPMS?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>RIAPMS (Rwanda Internship & Academic Placement Management System) is a national platform that
+                            connects students seeking internships with companies offering placement opportunities. We
+                            help bridge the gap between education and employment by matching students with internships
+                            based on their field of study, skills, and location preferences.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Is RIAPMS free to use?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, RIAPMS is completely free for both students and companies. The platform is funded by the
+                            government to support youth employment and skills development in Rwanda.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Who can use RIAPMS?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>RIAPMS is available to:</p>
+                        <ul>
+                            <li>Students enrolled in Rwandan universities and TVET institutions</li>
+                            <li>Companies registered in Rwanda looking to hire interns</li>
+                            <li>Educational institutions for tracking student placements</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Questions -->
+            <div class="faq-category">
+                <h3><i class="fas fa-user-graduate me-2"></i>For Students</h3>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How do I register as a student?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Click on "Register" and select "Student." You'll need to provide your personal details,
+                            educational information (university, course, year), skills, and location. You can then
+                            upload your CV and start applying for internships.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Can I apply for internships outside my district?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! You can apply for internships anywhere in Rwanda. Our platform allows you to filter by
+                            province and district, but you're not limited to your location. Many students choose
+                            internships in different areas for diverse experience.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How does the matching algorithm work?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our smart matching system considers:</p>
+                        <ul>
+                            <li>Your field of study</li>
+                            <li>Your skills and qualifications</li>
+                            <li>Location preferences</li>
+                            <li>Company requirements</li>
+                        </ul>
+                        <p>You'll receive notifications about internships that match your profile.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>What happens after I apply?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>After applying, the company will review your application. You'll receive email notifications
+                            about:
+                        </p>
+                        <ul>
+                            <li>Application received</li>
+                            <li>Interview invitation</li>
+                            <li>Acceptance or rejection</li>
+                        </ul>
+                        <p>If accepted, the company will issue a placement letter through the platform.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Are internships paid?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Internship compensation varies by company. Some companies offer stipends while others provide
+                            experience only. Each internship listing shows details about compensation. We recommend
+                            discussing this with the company during the interview process.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company Questions -->
+            <div class="faq-category">
+                <h3><i class="fas fa-building me-2"></i>For Companies</h3>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How do I register my company?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Click on "Register" and select "Company." You'll need to provide your business registration
+                            details, company information, and contact person. All companies are verified by
+                            administrators before becoming active on the platform.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How do I post an internship?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Once your company is verified, log in to your dashboard and click "Post Internship." Fill in
+                            the details including job title, description, requirements, location, duration, and whether
+                            compensation is offered. Submit for admin approval.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How long does verification take?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Company verification typically takes 24-48 hours. You'll receive an email once your company
+                            is approved. If you need expedited verification, contact our support team.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Can I issue placement letters through the platform?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Our platform allows you to generate and send digital placement letters directly to
+                            accepted students. This helps formalize the internship arrangement and provides students
+                            with official documentation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Questions -->
+            <div class="faq-category">
+                <h3><i class="fas fa-cog me-2"></i>Technical Support</h3>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>What if I forgot my password?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Click "Login" and then "Forgot Password." Enter your email address and you'll receive a link
+                            to reset your password. If you don't receive the email, check your spam folder or contact
+                            support.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How do I update my profile?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Log in to your dashboard and navigate to "Profile Settings" where you can update your
+                            personal information, education details, skills, and upload a new CV.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Is the platform mobile-friendly?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! RIAPMS works on all devices including smartphones and tablets. You can also install it
+                            as a PWA (Progressive Web App) for offline access and a native app-like experience.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="contact-box mt-5">
+                <h3>Still Have Questions?</h3>
+                <p class="text-muted mb-4">Can't find the answer you're looking for? Contact our support team.</p>
+                <a href="mailto:support@riapms.gov.rw" class="btn btn-primary btn-lg">
+                    <i class="fas fa-envelope me-2"></i>Contact Support
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4><img src="assets/logo-square.svg" alt="RIAPMS" height="35" class="me-2">RIAPMS</h4>
+                    <p class="text-muted mb-3">Rwanda Internship & Academic Placement Management System</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="mission.html">Mission</a></li>
+                        <li><a href="goals.html">Goals</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Contact Us</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt me-2"></i>Kigali, Rwanda</li>
+                        <li><i class="fas fa-envelope me-2"></i>info@riapms.gov.rw</li>
+                        <li><i class="fas fa-phone me-2"></i>+250 788 000 000</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom text-center">
+                <p class="mb-0">&copy; 2024 RIAPMS. All rights reserved. Rwanda Internship & Academic Placement
+                    Management System</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // Search Functionality
+        document.getElementById('faqSearch').addEventListener('input', function (e) {
+            const searchTerm = e.target.value.toLowerCase();
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const question = item.querySelector('h4').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

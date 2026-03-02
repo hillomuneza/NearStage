@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="RIAPMS - Rwanda Internship & Academic Placement Management System. Connect students with internships based on location, field, and skills.">
+    <meta name="theme-color" content="#2563eb">
+    <title>RIAPMS - Rwanda Internship & Placement System</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icon-192.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/logo-square.svg" alt="RIAPMS Logo" height="35" class="me-2">
+                <span class="d-none d-md-inline">RIAPMS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="mission.html">Mission</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goals.html">Goals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-outline-light btn-sm" href="login.html">
+                            <i class="fas fa-sign-in-alt me-1"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <div class="dropdown">
+                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown">
+                                <i class="fas fa-user-plus me-1"></i> Register
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="register-student.html">Student</a></li>
+                                <li><a class="dropdown-item" href="register-company.html">Company</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Video -->
+    <section id="home" class="hero-section">
+        <div class="hero-overlay"></div>
+        <video autoplay muted loop playsinline class="hero-video" id="heroVideo" poster="assets/hero-bg.jpg">
+            <source
+                src="https://assets.mixkit.co/videos/preview/mixkit-people-working-in-a-modern-office-4939-large.mp4"
+                type="video/mp4">
+        </video>
+        <div class="container hero-content">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h1 class="hero-title animate__animated animate__fadeInUp">
+                        Find Your Perfect <span class="text-primary">Internship</span> in Rwanda
+                    </h1>
+                    <p class="hero-subtitle animate__animated animate__fadeInUp animate__delay-1s">
+                        RIAPMS connects students with top companies based on location, field of study, and skills.
+                        Smart matching for better career opportunities.
+                    </p>
+                    <div class="hero-buttons animate__animated animate__fadeInUp animate__delay-2s">
+                        <a href="register-student.html" class="btn btn-primary btn-lg me-2">
+                            <i class="fas fa-user-graduate me-2"></i> I'm a Student
+                        </a>
+                        <a href="register-company.html" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-building me-2"></i> I'm a Company
+                        </a>
+                    </div>
+                    <div class="hero-stats animate__animated animate__fadeInUp animate__delay-3s">
+                        <div class="stat-item">
+                            <h3><span class="counter" data-target="5000">0</span>+</h3>
+                            <p>Students</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3><span class="counter" data-target="200">0</span>+</h3>
+                            <p>Companies</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3><span class="counter" data-target="1000">0</span>+</h3>
+                            <p>Placements</p>
+                        </div>
+                    </div>
+                    <!-- Video Controls -->
+                    <div class="video-controls mt-4">
+                        <button class="btn btn-outline-light btn-sm me-2" onclick="toggleHeroVideo()"
+                            id="videoToggleBtn">
+                            <i class="fas fa-pause me-1"></i> Pause
+                        </button>
+                        <button class="btn btn-outline-light btn-sm" onclick="toggleMute()" id="muteBtn">
+                            <i class="fas fa-volume-up me-1"></i> Mute
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#about" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600"
+                            alt="Students and professionals" class="img-fluid rounded-4">
+                        <div class="about-badge">
+                            <i class="fas fa-award"></i>
+                            <span>#1 Placement Platform in Rwanda</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-content">
+                        <span class="section-subtitle">About RIAPMS</span>
+                        <h2 class="section-title">Empowering Rwanda's Future Workforce</h2>
+                        <p>
+                            RIAPMS (Rwanda Internship & Academic Placement Management System) is a national-level
+                            platform
+                            designed to bridge the gap between students and employers. We leverage smart technology to
+                            match students with internship opportunities that align with their skills and location
+                            preferences.
+                        </p>
+                        <div class="about-features">
+                            <div class="feature-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h5>Location-Based Matching</h5>
+                                    <p>Find opportunities near your district</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-brain"></i>
+                                <div>
+                                    <h5>Smart AI Matching</h5>
+                                    <p>Algorithm matches based on skills & field</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-file-pdf"></i>
+                                <div>
+                                    <h5>Easy Applications</h5>
+                                    <p>Upload CV & apply in seconds</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <span class="section-subtitle">How It Works</span>
+                    <h2 class="section-title">Get Started in 3 Easy Steps</h2>
+                </div>
+            </div>
+            <div class="row g-4 mt-4">
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <h4>Create Account</h4>
+                        <p>Register as a student or company and complete your profile with your skills, education, and
+                            location.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h4>Get Matched</h4>
+                        <p>Our smart algorithm matches students with relevant internships based on field, skills, and
+                            location.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h4>Start Working</h4>
+                        <p>Apply, get accepted, and download your placement letter to begin your internship journey.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <span class="section-subtitle">Why Choose RIAPMS</span>
+                    <h2 class="section-title">Everything You Need</h2>
+                </div>
+            </div>
+            <div class="row g-4 mt-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h4>Province & District Based</h4>
+                        <p>Filter internships by your specific location across all Rwanda provinces and districts.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h4>All Industries Covered</h4>
+                        <p>From IT and Finance to Agriculture and Tourism - find opportunities in your field.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>Mobile Friendly</h4>
+                        <p>Access RIAPMS on any device. Install as a PWA app on your phone for offline access.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h4>Email Notifications</h4>
+                        <p>Get notified about new internships, application status updates, and more.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h4>Digital Placement Letters</h4>
+                        <p>Companies can generate and send placement letters directly through the platform.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Verified Companies</h4>
+                        <p>All companies are verified and approved by administrators before posting opportunities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h2>Ready to Start Your Career Journey?</h2>
+                    <p>Join thousands of students and companies already using RIAPMS</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a href="register-student.html" class="btn btn-light btn-lg me-2">Register Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <span class="section-subtitle">Contact Us</span>
+                    <h2 class="section-title">Get In Touch</h2>
+                </div>
+            </div>
+            <div class="row g-4 mt-4">
+                <div class="col-md-4">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Email</h4>
+                        <p>info@riapms.rw</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <h4>Phone</h4>
+                        <p>+250 788 000 000</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Location</h4>
+                        <p>Kigali, Rwanda</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4><img src="assets/logo-square.svg" alt="RIAPMS" height="35" class="me-2">RIAPMS</h4>
+                    <p>Rwanda Internship & Academic Placement Management System. Connecting students with opportunities
+                        across Rwanda.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="mission.html">Mission</a></li>
+                        <li><a href="goals.html">Goals</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>For Students</h5>
+                    <ul class="footer-links">
+                        <li><a href="register-student.html">Register</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="login.html">Browse Internships</a></li>
+                        <li><a href="login.html">My Applications</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>For Companies</h5>
+                    <ul class="footer-links">
+                        <li><a href="register-company.html">Register</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="login.html">Post Internship</a></li>
+                        <li><a href="login.html">View Applicants</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Legal</h5>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 RIAPMS. All rights reserved. Built for Rwanda's students and employers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script>
+        // Hero Video Autoplay
+        const heroVideo = document.getElementById('heroVideo');
+        const videoToggleBtn = document.getElementById('videoToggleBtn');
+        const muteBtn = document.getElementById('muteBtn');
+        let isPlaying = true;
+        let isMuted = true;
+
+        // Ensure autoplay works
+        window.addEventListener('load', function () {
+            if (heroVideo) {
+                heroVideo.play().catch(function (error) {
+                    console.log('Autoplay was prevented:', error);
+                    // Try to play on user interaction
+                    document.addEventListener('click', function () {
+                        heroVideo.play();
+                    }, { once: true });
+                });
+            }
+        });
+
+        function toggleHeroVideo() {
+            if (isPlaying) {
+                heroVideo.pause();
+                videoToggleBtn.innerHTML = '<i class="fas fa-play me-1"></i> Play';
+            } else {
+                heroVideo.play();
+                videoToggleBtn.innerHTML = '<i class="fas fa-pause me-1"></i> Pause';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function toggleMute() {
+            if (isMuted) {
+                heroVideo.muted = false;
+                muteBtn.innerHTML = '<i class="fas fa-volume-up me-1"></i> Sound On';
+            } else {
+                heroVideo.muted = true;
+                muteBtn.innerHTML = '<i class="fas fa-volume-mute me-1"></i> Mute';
+            }
+            isMuted = !isMuted;
+        }
+    </script>
+    <!-- PWA Service Worker -->
+    <script src="sw.js"></script>
+</body>
+
+</html>

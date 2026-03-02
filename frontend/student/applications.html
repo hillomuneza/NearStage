@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>My Applications - RIAPMS</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../assets/icon-192.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-graduation-cap me-2"></i>RIAPMS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-home me-1"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="internships.html">
+                            <i class="fas fa-briefcase me-1"></i> Browse Internships
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="applications.html">
+                            <i class="fas fa-file-alt me-1"></i> My Applications
+                        </a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-light dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown">
+                                <div class="user-avatar"
+                                    style="width: 32px; height: 32px; display: inline-flex; margin-right: 8px;">
+                                    <span id="userInitials">JD</span>
+                                </div>
+                                <span id="userName">Student</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="profile.html"><i
+                                            class="fas fa-user me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="settings.html"><i
+                                            class="fas fa-cog me-2"></i>Settings</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" onclick="window.RIAPMS.logout(); return false;"><i
+                                            class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Applications Content -->
+    <div class="dashboard-content">
+        <div class="container">
+            <!-- Header -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3><i class="fas fa-file-alt me-2 text-primary"></i>My Applications</h3>
+                                <p class="text-muted mb-0">Track the status of your internship applications</p>
+                            </div>
+                            <a href="internships.html" class="btn btn-primary">
+                                <i class="fas fa-search me-2"></i>Find More Internships
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(37, 99, 235, 0.1); color: #2563eb;">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <div class="stat-number" id="totalApplications">0</div>
+                        <div class="stat-label">Total Applications</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-number" id="pendingCount">0</div>
+                        <div class="stat-label">Pending</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-number" id="acceptedCount">0</div>
+                        <div class="stat-label">Accepted</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Applications List -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4><i class="fas fa-list me-2 text-primary"></i>Application History</h4>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-primary btn-sm active"
+                                    onclick="filterApplications('all')">All</button>
+                                <button class="btn btn-outline-warning btn-sm"
+                                    onclick="filterApplications('pending')">Pending</button>
+                                <button class="btn btn-outline-success btn-sm"
+                                    onclick="filterApplications('accepted')">Accepted</button>
+                                <button class="btn btn-outline-danger btn-sm"
+                                    onclick="filterApplications('rejected')">Rejected</button>
+                            </div>
+                        </div>
+
+                        <div id="applicationsList">
+                            <div class="text-center py-4">
+                                <div class="spinner-border text-primary" role="status"></div>
+                                <p class="mt-2 text-muted">Loading applications...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tips -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="dashboard-card">
+                        <h4><i class="fas fa-lightbulb me-2 text-warning"></i>Application Tips</h4>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <ul>
+                                    <li>Check your email regularly for updates</li>
+                                    <li>Complete your profile to increase match chances</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul>
+                                    <li>Apply to multiple internships to improve chances</li>
+                                    <li>Make sure your CV is up to date</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+
+    <script>
+        let allApplications = [];
+        let currentFilter = 'all';
+
+        // Check authentication
+        if (!window.RIAPMS.requireAuth()) { }
+
+        // Load user data
+        const user = window.RIAPMS.getUser();
+        if (user) {
+            document.getElementById('userInitials').textContent = window.RIAPMS.getInitials(user.name || 'Student');
+            document.getElementById('userName').textContent = user.name || 'Student';
+        }
+
+        // Load applications
+        async function loadApplications() {
+            try {
+                const applications = await window.RIAPMS.apiCall('/internships/student/applications');
+                allApplications = applications;
+
+                // Update stats
+                document.getElementById('totalApplications').textContent = applications.length;
+                document.getElementById('pendingCount').textContent = applications.filter(a => a.status === 'pending').length;
+                document.getElementById('acceptedCount').textContent = applications.filter(a => a.status === 'accepted').length;
+
+                renderApplications();
+            } catch (error) {
+                console.error('Error loading applications:', error);
+                document.getElementById('applicationsList').innerHTML = `
+          <div class="alert alert-warning">
+            Unable to load applications. Please try again later.
+          </div>
+        `;
+            }
+        }
+
+        function renderApplications() {
+            const container = document.getElementById('applicationsList');
+            const filtered = currentFilter === 'all'
+                ? allApplications
+                : allApplications.filter(a => a.status === currentFilter);
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+          <div class="text-center py-4">
+            <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
+            <p class="text-muted">No applications found</p>
+            <a href="internships.html" class="btn btn-primary">Browse Internships</a>
+          </div>
+        `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(app => {
+                const internship = app.internship || {};
+                const company = internship.companyId || {};
+
+                let statusClass = 'status-pending';
+                let statusIcon = 'clock';
+                if (app.status === 'accepted') {
+                    statusClass = 'status-accepted';
+                    statusIcon = 'check-circle';
+                } else if (app.status === 'rejected') {
+                    statusClass = 'status-rejected';
+                    statusIcon = 'times-circle';
+                }
+
+                return `
+          <div class="application-card">
+            <div class="d-flex justify-content-between align-items-start">
+              <div class="d-flex gap-3">
+                <div class="company-logo">
+                  <i class="fas fa-building"></i>
+                </div>
+                <div>
+                  <h5 class="mb-1">${internship.title || 'Internship'}</h5>
+                  <div class="company-name">${company.companyName || 'Company'}</div>
+                  <div class="meta-info">
+                    <span><i class="fas fa-map-marker-alt"></i> ${internship.location?.district || ''}, ${internship.location?.province || ''}</span>
+                    <span><i class="fas fa-clock"></i> ${internship.duration || ''}</span>
+                    <span><i class="fas fa-book"></i> ${internship.field || ''}</span>
+                  </div>
+                  <div class="mt-2 text-muted small">
+                    <i class="fas fa-calendar-alt me-1"></i>Applied on ${window.RIAPMS.formatDate(app.appliedAt)}
+                  </div>
+                </div>
+              </div>
+              <div class="text-end">
+                <span class="status-badge ${statusClass}">
+                  <i class="fas fa-${statusIcon} me-1"></i>${app.status}
+                </span>
+              </div>
+            </div>
+            <div class="mt-3">
+              <a href="internship-details.html?id=${internship._id}" class="btn btn-outline-primary btn-sm">
+                <i class="fas fa-eye me-1"></i>View Details
+              </a>
+            </div>
+          </div>
+        `;
+            }).join('');
+        }
+
+        function filterApplications(filter) {
+            currentFilter = filter;
+
+            // Update button states
+            document.querySelectorAll('.btn-group .btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase() === filter || (filter === 'all' && btn.textContent === 'All')) {
+                    btn.classList.add('active');
+                }
+            });
+
+            renderApplications();
+        }
+
+        document.addEventListener('DOMContentLoaded', loadApplications);
+    </script>
+</body>
+
+</html>

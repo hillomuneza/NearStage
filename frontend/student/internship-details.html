@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>Internship Details - RIAPMS</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../assets/icon-192.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-graduation-cap me-2"></i>RIAPMS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-home me-1"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="internships.html">
+                            <i class="fas fa-briefcase me-1"></i> Browse Internships
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="applications.html">
+                            <i class="fas fa-file-alt me-1"></i> My Applications
+                        </a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-light dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown">
+                                <div class="user-avatar"
+                                    style="width: 32px; height: 32px; display: inline-flex; margin-right: 8px;">
+                                    <span id="userInitials">JD</span>
+                                </div>
+                                <span id="userName">Student</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="profile.html"><i
+                                            class="fas fa-user me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="settings.html"><i
+                                            class="fas fa-cog me-2"></i>Settings</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" onclick="window.RIAPMS.logout(); return false;"><i
+                                            class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Internship Details Content -->
+    <div class="dashboard-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <!-- Back Button -->
+                    <div class="mb-3">
+                        <a href="javascript:history.back()" class="btn btn-outline-primary">
+                            <i class="fas fa-arrow-left me-2"></i>Back
+                        </a>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div id="loadingState">
+                        <div class="dashboard-card">
+                            <div class="text-center py-5">
+                                <div class="spinner-border text-primary" role="status"></div>
+                                <p class="mt-2 text-muted">Loading internship details...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Error State -->
+                    <div id="errorState" style="display: none;">
+                        <div class="dashboard-card">
+                            <div class="alert alert-danger">
+                                <i class="fas fa-exclamation-circle me-2"></i>
+                                <span id="errorMessage">Unable to load internship details</span>
+                            </div>
+                            <a href="internships.html" class="btn btn-primary">Browse Internships</a>
+                        </div>
+                    </div>
+
+                    <!-- Internship Content -->
+                    <div id="internshipContent" style="display: none;">
+                        <!-- Header Card -->
+                        <div class="dashboard-card mb-4">
+                            <div class="d-flex gap-3 mb-4">
+                                <div class="company-logo-lg">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h3 id="internshipTitle">Internship Title</h3>
+                                    <div class="company-name-lg" id="companyName">Company Name</div>
+                                    <div class="meta-info mt-2">
+                                        <span class="me-3"><i class="fas fa-map-marker-alt me-1"></i><span
+                                                id="location">Location</span></span>
+                                        <span class="me-3"><i class="fas fa-clock me-1"></i><span
+                                                id="duration">Duration</span></span>
+                                        <span class="me-3"><i class="fas fa-book me-1"></i><span
+                                                id="field">Field</span></span>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success fs-6" id="statusBadge">Open</span>
+                                </div>
+                            </div>
+
+                            <!-- Quick Info -->
+                            <div class="row g-3 text-center">
+                                <div class="col-4">
+                                    <div class="p-3 bg-light rounded">
+                                        <div class="fs-4 fw-bold text-primary" id="positionsCount">0</div>
+                                        <div class="small text-muted">Positions</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-3 bg-light rounded">
+                                        <div class="fs-4 fw-bold text-primary" id="filledCount">0</div>
+                                        <div class="small text-muted">Filled</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-3 bg-light rounded">
+                                        <div class="fs-4 fw-bold text-primary" id="appliedCount">0</div>
+                                        <div class="small text-muted">Applied</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Description Card -->
+                        <div class="dashboard-card mb-4">
+                            <h4><i class="fas fa-align-left me-2 text-primary"></i>Description</h4>
+                            <p id="description" class="mt-3">Description goes here...</p>
+                        </div>
+
+                        <!-- Requirements Card -->
+                        <div class="dashboard-card mb-4">
+                            <h4><i class="fas fa-list-check me-2 text-primary"></i>Requirements</h4>
+                            <ul id="requirementsList" class="mt-3">
+                                <!-- Requirements will be added here -->
+                            </ul>
+                        </div>
+
+                        <!-- Skills Card -->
+                        <div class="dashboard-card mb-4">
+                            <h4><i class="fas fa-code me-2 text-primary"></i>Skills Required</h4>
+                            <div id="skillsContainer" class="mt-3">
+                                <!-- Skills will be added here -->
+                            </div>
+                        </div>
+
+                        <!-- Benefits Card -->
+                        <div class="dashboard-card mb-4">
+                            <h4><i class="fas fa-gift me-2 text-primary"></i>Benefits</h4>
+                            <p id="benefits">Benefits information goes here...</p>
+                        </div>
+
+                        <!-- Company Info Card -->
+                        <div class="dashboard-card mb-4">
+                            <h4><i class="fas fa-building me-2 text-primary"></i>About the Company</h4>
+                            <div class="d-flex gap-3 mt-3">
+                                <div class="company-logo">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div>
+                                    <h5 id="companyName2">Company Name</h5>
+                                    <p class="text-muted mb-2" id="companyIndustry">Industry</p>
+                                    <p id="companyDescription">Company description...</p>
+                                    <p class="mb-0" id="companyWebsite"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Application Status -->
+                        <div id="applicationStatus" class="dashboard-card mb-4" style="display: none;">
+                            <!-- Will be populated based on application status -->
+                        </div>
+
+                        <!-- Apply Button -->
+                        <div class="dashboard-card" id="applySection">
+                            <div id="notAppliedSection">
+                                <button class="btn btn-primary btn-lg w-100" id="applyButton"
+                                    onclick="applyForInternship()">
+                                    <i class="fas fa-paper-plane me-2"></i>Apply Now
+                                </button>
+                                <p class="text-muted text-center mt-2 mb-0">Click to submit your application</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+
+    <script>
+        let internshipId = null;
+        let hasApplied = false;
+
+        // Check authentication
+        if (!window.RIAPMS.requireAuth()) { }
+
+        // Get internship ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        internshipId = urlParams.get('id');
+
+        if (!internshipId) {
+            showError('No internship specified');
+        }
+
+        // Load user data
+        const user = window.RIAPMS.getUser();
+        if (user) {
+            document.getElementById('userInitials').textContent = window.RIAPMS.getInitials(user.name || 'Student');
+            document.getElementById('userName').textContent = user.name || 'Student';
+        }
+
+        // Load internship details
+        async function loadInternship() {
+            try {
+                const internship = await window.RIAPMS.apiCall(`/internships/student/internship/${internshipId}`);
+
+                // Populate UI
+                document.getElementById('internshipTitle').textContent = internship.title;
+                document.getElementById('companyName').textContent = internship.companyId?.companyName || 'Company';
+                document.getElementById('companyName2').textContent = internship.companyId?.companyName || 'Company';
+                document.getElementById('location').textContent = `${internship.location?.district || ''}, ${internship.location?.province || ''}`;
+                document.getElementById('duration').textContent = internship.duration || 'Not specified';
+                document.getElementById('field').textContent = internship.field || 'Not specified';
+                document.getElementById('description').textContent = internship.description || 'No description provided';
+                document.getElementById('benefits').textContent = internship.benefits || 'Not specified';
+                document.getElementById('companyIndustry').textContent = internship.companyId?.industry || 'Not specified';
+                document.getElementById('companyDescription').textContent = internship.companyId?.description || 'No description available';
+
+                if (internship.companyId?.website) {
+                    document.getElementById('companyWebsite').innerHTML = `<i class="fas fa-globe me-2"></i><a href="${internship.companyId.website}" target="_blank">${internship.companyId.website}</a>`;
+                }
+
+                document.getElementById('positionsCount').textContent = internship.positions || 0;
+                document.getElementById('filledCount').textContent = internship.filledPositions || 0;
+                document.getElementById('appliedCount').textContent = internship.applicants?.length || 0;
+
+                // Status badge
+                if (internship.status === 'open') {
+                    document.getElementById('statusBadge').textContent = 'Open';
+                    document.getElementById('statusBadge').className = 'badge bg-success fs-6';
+                } else {
+                    document.getElementById('statusBadge').textContent = 'Closed';
+                    document.getElementById('statusBadge').className = 'badge bg-danger fs-6';
+                }
+
+                // Requirements
+                const requirementsList = document.getElementById('requirementsList');
+                if (internship.requirements && internship.requirements.length > 0) {
+                    requirementsList.innerHTML = internship.requirements.map(req => `<li>${req}</li>`).join('');
+                } else {
+                    requirementsList.innerHTML = '<li>No specific requirements listed</li>';
+                }
+
+                // Skills
+                const skillsContainer = document.getElementById('skillsContainer');
+                if (internship.skillsRequired && internship.skillsRequired.length > 0) {
+                    skillsContainer.innerHTML = internship.skillsRequired.map(skill =>
+                        `<span class="skill-tag">${skill}</span>`
+                    ).join('');
+                } else {
+                    skillsContainer.innerHTML = '<span class="text-muted">No specific skills required</span>';
+                }
+
+                // Check if user has applied
+                hasApplied = internship.applicants?.some(app => app.studentId === user?._id) || false;
+
+                if (hasApplied) {
+                    const application = internship.applicants?.find(app => app.studentId === user?._id);
+                    showApplicationStatus(application);
+                }
+
+                // Show content
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('internshipContent').style.display = 'block';
+
+            } catch (error) {
+                console.error('Error loading internship:', error);
+                showError(error.message || 'Failed to load internship details');
+            }
+        }
+
+        function showApplicationStatus(application) {
+            const statusDiv = document.getElementById('applicationStatus');
+            statusDiv.style.display = 'block';
+
+            let statusClass = 'bg-warning';
+            let statusIcon = 'clock';
+            let statusText = 'Pending Review';
+
+            if (application?.status === 'accepted') {
+                statusClass = 'bg-success';
+                statusIcon = 'check-circle';
+                statusText = 'Accepted!';
+            } else if (application?.status === 'rejected') {
+                statusClass = 'bg-danger';
+                statusIcon = 'times-circle';
+                statusText = 'Not Selected';
+            }
+
+            statusDiv.innerHTML = `
+        <div class="alert ${statusClass} text-white">
+          <i class="fas fa-${statusIcon} me-2"></i>
+          <strong>Application Status:</strong> ${statusText}
+          ${application?.appliedAt ? `<br><small>Applied on ${window.RIAPMS.formatDate(application.appliedAt)}</small>` : ''}
+        </div>
+      `;
+
+            document.getElementById('applySection').style.display = 'none';
+        }
+
+        function showError(message) {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('errorState').style.display = 'block';
+            document.getElementById('errorMessage').textContent = message;
+        }
+
+        async function applyForInternship() {
+            const button = document.getElementById('applyButton');
+            button.disabled = true;
+            button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Applying...';
+
+            try {
+                const result = await window.RIAPMS.apiCall(`/internships/student/apply/${internshipId}`, 'POST', {});
+
+                window.RIAPMS.showToast('Application submitted successfully!', 'success');
+
+                // Reload to show application status
+                setTimeout(() => window.location.reload(), 1500);
+            } catch (error) {
+                console.error('Error applying:', error);
+                window.RIAPMS.showToast(error.message || 'Failed to apply', 'error');
+                button.disabled = false;
+                button.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Apply Now';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadInternship);
+    </script>
+</body>
+
+</html>
