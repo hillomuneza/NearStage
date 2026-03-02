@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#2563eb">
-  <title>My Internships - RIAPMS</title>
+  <title>My Internships - NearStage</title>
   
   <!-- PWA -->
   <link rel="manifest" href="../manifest.json">
@@ -24,7 +24,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
     <div class="container">
       <a class="navbar-brand" href="../index.html">
-        <i class="fas fa-graduation-cap me-2"></i>RIAPMS
+        <i class="fas fa-graduation-cap me-2"></i>NearStage
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
@@ -58,7 +58,7 @@
                 <li><a class="dropdown-item" href="profile.html"><i class="fas fa-building me-2"></i>Company Profile</a></li>
                 <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i>Settings</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#" onclick="window.RIAPMS.logout(); return false;"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                <li><a class="dropdown-item" href="#" onclick="window.NearStage.logout(); return false;"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
               </ul>
             </div>
           </li>
@@ -153,19 +153,19 @@
     let currentFilter = 'all';
 
     // Check authentication
-    if (!window.RIAPMS.requireAuth()) {}
+    if (!window.NearStage.requireAuth()) {}
 
     // Load user data
-    const user = window.RIAPMS.getUser();
+    const user = window.NearStage.getUser();
     if (user) {
-      document.getElementById('userInitials').textContent = window.RIAPMS.getInitials(user.companyName || 'Company');
+      document.getElementById('userInitials').textContent = window.NearStage.getInitials(user.companyName || 'Company');
       document.getElementById('userName').textContent = user.companyName || 'Company';
     }
 
     // Load internships
     async function loadInternships() {
       try {
-        const internships = await window.RIAPMS.apiCall('/internships/company/internships');
+        const internships = await window.NearStage.apiCall('/internships/company/internships');
         allInternships = internships;
         
         // Update stats
@@ -266,8 +266,8 @@
 
                 <div class="mt-3">
                   <small class="text-muted">
-                    <i class="fas fa-calendar-alt me-1"></i>Posted on ${window.RIAPMS.formatDate(internship.createdAt)}
-                    ${internship.deadline ? `<span class="ms-3"><i class="fas fa-calendar-times me-1"></i>Deadline: ${window.RIAPMS.formatDate(internship.deadline)}</span>` : ''}
+                    <i class="fas fa-calendar-alt me-1"></i>Posted on ${window.NearStage.formatDate(internship.createdAt)}
+                    ${internship.deadline ? `<span class="ms-3"><i class="fas fa-calendar-times me-1"></i>Deadline: ${window.NearStage.formatDate(internship.deadline)}</span>` : ''}
                   </small>
                 </div>
               </div>
@@ -311,12 +311,12 @@
       const newStatus = currentStatus === 'open' ? 'closed' : 'open';
       
       try {
-        await window.RIAPMS.apiCall(`/internships/company/internship/${internshipId}`, 'PUT', { status: newStatus });
-        window.RIAPMS.showToast(`Internship ${newStatus === 'open' ? 'opened' : 'closed'} successfully`, 'success');
+        await window.NearStage.apiCall(`/internships/company/internship/${internshipId}`, 'PUT', { status: newStatus });
+        window.NearStage.showToast(`Internship ${newStatus === 'open' ? 'opened' : 'closed'} successfully`, 'success');
         loadInternships();
       } catch (error) {
         console.error('Error updating status:', error);
-        window.RIAPMS.showToast('Failed to update status', 'error');
+        window.NearStage.showToast('Failed to update status', 'error');
       }
     }
 
@@ -326,12 +326,12 @@
       }
 
       try {
-        await window.RIAPMS.apiCall(`/internships/company/internship/${internshipId}`, 'DELETE');
-        window.RIAPMS.showToast('Internship deleted successfully', 'success');
+        await window.NearStage.apiCall(`/internships/company/internship/${internshipId}`, 'DELETE');
+        window.NearStage.showToast('Internship deleted successfully', 'success');
         loadInternships();
       } catch (error) {
         console.error('Error deleting internship:', error);
-        window.RIAPMS.showToast('Failed to delete internship', 'error');
+        window.NearStage.showToast('Failed to delete internship', 'error');
       }
     }
 

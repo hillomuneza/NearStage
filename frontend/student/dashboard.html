@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#2563eb">
-  <title>Student Dashboard - RIAPMS</title>
+  <title>Student Dashboard - NearStage</title>
 
   <!-- PWA -->
   <link rel="manifest" href="../manifest.json">
@@ -26,7 +26,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
     <div class="container">
       <a class="navbar-brand" href="../index.html">
-        <i class="fas fa-graduation-cap me-2"></i>RIAPMS
+        <i class="fas fa-graduation-cap me-2"></i>NearStage
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
@@ -67,7 +67,7 @@
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="#" onclick="window.RIAPMS.logout(); return false;"><i
+                <li><a class="dropdown-item" href="#" onclick="window.NearStage.logout(); return false;"><i
                       class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
               </ul>
             </div>
@@ -161,7 +161,7 @@
         <div class="col-md-6">
           <div class="dashboard-card">
             <h4><i class="fas fa-question-circle me-2 text-primary"></i>Need Help?</h4>
-            <p class="text-muted">Learn how RIAPMS matches you with the best internships.</p>
+            <p class="text-muted">Learn how NearStage matches you with the best internships.</p>
             <a href="../index.html#how-it-works" class="btn btn-outline-primary">
               <i class="fas fa-info-circle me-2"></i>How It Works
             </a>
@@ -239,14 +239,14 @@
 
   <script>
     // Check authentication
-    if (!window.RIAPMS.requireAuth()) {
+    if (!window.NearStage.requireAuth()) {
       // Will redirect to login
     }
 
     // Load user data
-    const user = window.RIAPMS.getUser();
+    const user = window.NearStage.getUser();
     if (user) {
-      document.getElementById('userInitials').textContent = window.RIAPMS.getInitials(user.name || 'Student');
+      document.getElementById('userInitials').textContent = window.NearStage.getInitials(user.name || 'Student');
       document.getElementById('userName').textContent = user.name || 'Student';
       document.getElementById('welcomeName').textContent = user.name ? user.name.split(' ')[0] : 'Student';
     }
@@ -254,7 +254,7 @@
     // Load matched internships
     async function loadMatchedInternships() {
       try {
-        const internships = await window.RIAPMS.apiCall('/internships/student/matched');
+        const internships = await window.NearStage.apiCall('/internships/student/matched');
 
         document.getElementById('matchedCount').textContent = internships.length;
 
@@ -320,7 +320,7 @@
     // Load applications
     async function loadApplications() {
       try {
-        const applications = await window.RIAPMS.apiCall('/internships/student/applications');
+        const applications = await window.NearStage.apiCall('/internships/student/applications');
 
         document.getElementById('appliedCount').textContent = applications.length;
 

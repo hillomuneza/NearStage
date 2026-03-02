@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2563eb">
-    <title>Applicant Details - RIAPMS</title>
+    <title>Applicant Details - NearStage</title>
 
     <!-- PWA -->
     <link rel="manifest" href="../manifest.json">
@@ -27,7 +27,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
         <div class="container">
             <a class="navbar-brand" href="../index.html">
-                <i class="fas fa-graduation-cap me-2"></i>RIAPMS
+                <i class="fas fa-graduation-cap me-2"></i>NearStage
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -67,7 +67,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#" onclick="window.RIAPMS.logout(); return false;"><i
+                                <li><a class="dropdown-item" href="#" onclick="window.NearStage.logout(); return false;"><i
                                             class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
                             </ul>
                         </div>
@@ -225,7 +225,7 @@
         let applicationData = null;
 
         // Check authentication
-        if (!window.RIAPMS.requireAuth()) { }
+        if (!window.NearStage.requireAuth()) { }
 
         // Get parameters from URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -237,16 +237,16 @@
         }
 
         // Load user data
-        const user = window.RIAPMS.getUser();
+        const user = window.NearStage.getUser();
         if (user) {
-            document.getElementById('userInitials').textContent = window.RIAPMS.getInitials(user.companyName || 'Company');
+            document.getElementById('userInitials').textContent = window.NearStage.getInitials(user.companyName || 'Company');
             document.getElementById('userName').textContent = user.companyName || 'Company';
         }
 
         // Load applicant details
         async function loadApplicant() {
             try {
-                const applicants = await window.RIAPMS.apiCall(`/internships/company/internship/${internshipId}/applicants`);
+                const applicants = await window.NearStage.apiCall(`/internships/company/internship/${internshipId}/applicants`);
                 const applicant = applicants.find(a => a.studentId._id === studentId);
 
                 if (!applicant) {
@@ -258,7 +258,7 @@
                 const student = applicant.studentId;
 
                 // Populate UI
-                document.getElementById('studentInitials').textContent = window.RIAPMS.getInitials(student.name || 'Student');
+                document.getElementById('studentInitials').textContent = window.NearStage.getInitials(student.name || 'Student');
                 document.getElementById('studentName').textContent = student.name || 'Student';
                 document.getElementById('studentSchool').textContent = student.school || 'School not specified';
                 document.getElementById('studentField').textContent = student.field || 'Field not specified';
@@ -285,7 +285,7 @@
                 }
 
                 // Application details
-                document.getElementById('appliedDate').textContent = window.RIAPMS.formatDate(applicant.appliedAt);
+                document.getElementById('appliedDate').textContent = window.NearStage.formatDate(applicant.appliedAt);
 
                 let statusClass = 'bg-warning';
                 if (applicant.status === 'accepted') statusClass = 'bg-success';
@@ -353,15 +353,15 @@
             }
 
             try {
-                await window.RIAPMS.apiCall(`/internships/company/application/${internshipId}/${studentId}`, 'PUT', { status });
+                await window.NearStage.apiCall(`/internships/company/application/${internshipId}/${studentId}`, 'PUT', { status });
 
-                window.RIAPMS.showToast(`Applicant ${status} successfully`, 'success');
+                window.NearStage.showToast(`Applicant ${status} successfully`, 'success');
 
                 // Reload to update status
                 setTimeout(() => window.location.reload(), 1000);
             } catch (error) {
                 console.error('Error updating status:', error);
-                window.RIAPMS.showToast('Failed to update status', 'error');
+                window.NearStage.showToast('Failed to update status', 'error');
             }
         }
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2563eb">
-    <title>Practice Videos - RIAPMS</title>
+    <title>Practice Videos - NearStage</title>
 
     <!-- PWA -->
     <link rel="manifest" href="../manifest.json">
@@ -35,7 +35,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
         <div class="container">
             <a class="navbar-brand" href="../index.html">
-                <i class="fas fa-graduation-cap me-2"></i>RIAPMS
+                <i class="fas fa-graduation-cap me-2"></i>NearStage
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -75,7 +75,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#" onclick="window.RIAPMS.logout(); return false;"><i
+                                <li><a class="dropdown-item" href="#" onclick="window.NearStage.logout(); return false;"><i
                                             class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
                             </ul>
                         </div>
@@ -249,12 +249,12 @@
 
     <script>
         // Check authentication
-        if (!window.RIAPMS.requireAuth()) { }
+        if (!window.NearStage.requireAuth()) { }
 
         // Load user data
-        const user = window.RIAPMS.getUser();
+        const user = window.NearStage.getUser();
         if (user) {
-            document.getElementById('userInitials').textContent = window.RIAPMS.getInitials(user.name || 'Student');
+            document.getElementById('userInitials').textContent = window.NearStage.getInitials(user.name || 'Student');
             document.getElementById('userName').textContent = user.name || 'Student';
         }
 
@@ -277,7 +277,7 @@
 
             // In a real app, this would load the actual video
             const video = document.getElementById('displayVideo');
-            window.RIAPMS.showToast('Video player ready - configure video source in backend', 'info');
+            window.NearStage.showToast('Video player ready - configure video source in backend', 'info');
         }
 
         function playFullscreen() {
@@ -298,9 +298,9 @@
 
             if (isLooping) {
                 video.play();
-                window.RIAPMS.showToast('Video will loop continuously', 'success');
+                window.NearStage.showToast('Video will loop continuously', 'success');
             } else {
-                window.RIAPMS.showToast('Looping disabled', 'info');
+                window.NearStage.showToast('Looping disabled', 'info');
             }
         }
 
@@ -308,7 +308,7 @@
             const video = document.getElementById('displayVideo');
             video.pause();
             video.currentTime = 0;
-            window.RIAPMS.showToast('Video stopped', 'info');
+            window.NearStage.showToast('Video stopped', 'info');
         }
 
         function selectVideo(index) {
@@ -324,7 +324,7 @@
 
             // Show video section
             document.getElementById('backgroundVideoSection').style.display = 'block';
-            window.RIAPMS.showToast(`Selected: ${videos[index].title}`, 'info');
+            window.NearStage.showToast(`Selected: ${videos[index].title}`, 'info');
         }
 
         async function uploadVideo() {
@@ -334,25 +334,25 @@
             const file = fileInput.files[0];
 
             if (!title) {
-                window.RIAPMS.showToast('Please enter a video title', 'error');
+                window.NearStage.showToast('Please enter a video title', 'error');
                 return;
             }
 
             if (!file) {
-                window.RIAPMS.showToast('Please select a video file', 'error');
+                window.NearStage.showToast('Please select a video file', 'error');
                 return;
             }
 
             // Check file size (100MB max)
             if (file.size > 100 * 1024 * 1024) {
-                window.RIAPMS.showToast('File size must be less than 100MB', 'error');
+                window.NearStage.showToast('File size must be less than 100MB', 'error');
                 return;
             }
 
             // Check file type
             const validTypes = ['video/mp4', 'video/webm', 'video/ogg'];
             if (!validTypes.includes(file.type)) {
-                window.RIAPMS.showToast('Please upload a valid video file (MP4, WebM, or Ogg)', 'error');
+                window.NearStage.showToast('Please upload a valid video file (MP4, WebM, or Ogg)', 'error');
                 return;
             }
 
@@ -363,7 +363,7 @@
 
                 try {
                     // In a real app, this would upload to a server/cloud storage
-                    window.RIAPMS.showToast('Video uploaded successfully!', 'success');
+                    window.NearStage.showToast('Video uploaded successfully!', 'success');
 
                     // Clear form
                     document.getElementById('videoTitle').value = '';
@@ -374,7 +374,7 @@
                     addVideoToGallery(title, description);
                 } catch (error) {
                     console.error('Error uploading video:', error);
-                    window.RIAPMS.showToast('Failed to upload video', 'error');
+                    window.NearStage.showToast('Failed to upload video', 'error');
                 }
             };
             reader.readAsDataURL(file);

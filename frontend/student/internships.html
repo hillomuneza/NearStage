@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2563eb">
-    <title>Browse Internships - RIAPMS</title>
+    <title>Browse Internships - NearStage</title>
 
     <!-- PWA -->
     <link rel="manifest" href="../manifest.json">
@@ -27,7 +27,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
         <div class="container">
             <a class="navbar-brand" href="../index.html">
-                <i class="fas fa-graduation-cap me-2"></i>RIAPMS
+                <i class="fas fa-graduation-cap me-2"></i>NearStage
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -67,7 +67,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#" onclick="window.RIAPMS.logout(); return false;"><i
+                                <li><a class="dropdown-item" href="#" onclick="window.NearStage.logout(); return false;"><i
                                             class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
                             </ul>
                         </div>
@@ -161,18 +161,18 @@
 
     <script>
         // Check authentication
-        if (!window.RIAPMS.requireAuth()) { }
+        if (!window.NearStage.requireAuth()) { }
 
         // Load user
-        const user = window.RIAPMS.getUser();
+        const user = window.NearStage.getUser();
         if (user) {
-            document.getElementById('userInitials').textContent = window.RIAPMS.getInitials(user.name || 'Student');
+            document.getElementById('userInitials').textContent = window.NearStage.getInitials(user.name || 'Student');
             document.getElementById('userName').textContent = user.name || 'Student';
         }
 
         // Populate filter options
         const fieldSelect = document.getElementById('filterField');
-        window.RIAPMS.fieldsOfStudy.forEach(field => {
+        window.NearStage.fieldsOfStudy.forEach(field => {
             const option = document.createElement('option');
             option.value = field;
             option.textContent = field;
@@ -180,7 +180,7 @@
         });
 
         const provinceSelect = document.getElementById('filterProvince');
-        window.RIAPMS.provinces.forEach(province => {
+        window.NearStage.provinces.forEach(province => {
             const option = document.createElement('option');
             option.value = province;
             option.textContent = province;
@@ -192,8 +192,8 @@
             const districtSelect = document.getElementById('filterDistrict');
             districtSelect.innerHTML = '<option value="">All Districts</option>';
 
-            if (this.value && window.RIAPMS.districtsByProvince[this.value]) {
-                window.RIAPMS.districtsByProvince[this.value].forEach(district => {
+            if (this.value && window.NearStage.districtsByProvince[this.value]) {
+                window.NearStage.districtsByProvince[this.value].forEach(district => {
                     const option = document.createElement('option');
                     option.value = district;
                     option.textContent = district;
@@ -267,11 +267,11 @@
             if (!confirm('Apply for this internship?')) return;
 
             try {
-                await window.RIAPMS.apiCall(`/internships/student/apply/${id}`, 'POST', {});
-                window.RIAPMS.showToast('Application submitted successfully!');
+                await window.NearStage.apiCall(`/internships/student/apply/${id}`, 'POST', {});
+                window.NearStage.showToast('Application submitted successfully!');
                 loadInternships();
             } catch (error) {
-                window.RIAPMS.showToast(error.message, 'error');
+                window.NearStage.showToast(error.message, 'error');
             }
         }
 
@@ -279,7 +279,7 @@
         async function loadInternships() {
             try {
                 // Load matched
-                const matched = await window.RIAPMS.apiCall('/internships/student/matched');
+                const matched = await window.NearStage.apiCall('/internships/student/matched');
                 document.getElementById('matchedList').innerHTML = matched.length ?
                     matched.map(i => renderInternshipCard(i, true)).join('') :
                     '<div class="text-center py-5"><p class="text-muted">No matched internships found</p></div>';
@@ -294,10 +294,10 @@
                 if (province) query += `province=${province}&`;
                 if (district) query += `district=${district}&`;
 
-                const all = await window.RIAPMS.apiCall(`/internships/student/search${query}`);
+                const all = await window.NearStage.apiCall(`/internships/student/search${query}`);
 
                 // Get user's applications
-                const applications = await window.RIAPMS.apiCall('/internships/student/applications');
+                const applications = await window.NearStage.apiCall('/internships/student/applications');
                 const appliedIds = applications.map(a => a.internship._id);
 
                 all.forEach(i => i.applied = appliedIds.includes(i._id));
@@ -308,7 +308,7 @@
 
             } catch (error) {
                 console.error('Error:', error);
-                window.RIAPMS.showToast('Error loading internships', 'error');
+                window.NearStage.showToast('Error loading internships', 'error');
             }
         }
 

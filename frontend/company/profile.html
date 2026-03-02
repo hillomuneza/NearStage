@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2563eb">
-    <title>Company Profile - RIAPMS</title>
+    <title>Company Profile - NearStage</title>
 
     <!-- PWA -->
     <link rel="manifest" href="../manifest.json">
@@ -27,7 +27,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
         <div class="container">
             <a class="navbar-brand" href="../index.html">
-                <i class="fas fa-graduation-cap me-2"></i>RIAPMS
+                <i class="fas fa-graduation-cap me-2"></i>NearStage
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -67,7 +67,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#" onclick="window.RIAPMS.logout(); return false;"><i
+                                <li><a class="dropdown-item" href="#" onclick="window.NearStage.logout(); return false;"><i
                                             class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
                             </ul>
                         </div>
@@ -171,7 +171,7 @@
 
     <script>
         // Check authentication
-        if (!window.RIAPMS.requireAuth()) { }
+        if (!window.NearStage.requireAuth()) { }
 
         // Initialize
         document.addEventListener('DOMContentLoaded', async () => {
@@ -181,11 +181,11 @@
 
         async function loadProfile() {
             try {
-                const user = window.RIAPMS.getUser();
+                const user = window.NearStage.getUser();
                 if (user) {
-                    document.getElementById('userInitials').textContent = window.RIAPMS.getInitials(user.companyName || 'Company');
+                    document.getElementById('userInitials').textContent = window.NearStage.getInitials(user.companyName || 'Company');
                     document.getElementById('userName').textContent = user.companyName || 'Company';
-                    document.getElementById('profileInitials').textContent = window.RIAPMS.getInitials(user.companyName || 'Company');
+                    document.getElementById('profileInitials').textContent = window.NearStage.getInitials(user.companyName || 'Company');
                     document.getElementById('profileName').textContent = user.companyName || 'Company';
                     document.getElementById('profileIndustry').textContent = user.industry || 'No industry';
 
@@ -200,7 +200,7 @@
                 }
 
                 // Get full profile from API
-                const profile = await window.RIAPMS.apiCall('/auth/company/me');
+                const profile = await window.NearStage.apiCall('/auth/company/me');
 
                 // Update form
                 document.getElementById('inputCompanyName').value = profile.companyName || '';
@@ -221,14 +221,14 @@
 
             } catch (error) {
                 console.error('Error loading profile:', error);
-                window.RIAPMS.showToast('Failed to load profile', 'error');
+                window.NearStage.showToast('Failed to load profile', 'error');
             }
         }
 
         function populateFormFields() {
             // Populate industries
             const industrySelect = document.getElementById('inputIndustry');
-            window.RIAPMS.industries.forEach(industry => {
+            window.NearStage.industries.forEach(industry => {
                 const option = document.createElement('option');
                 option.value = industry;
                 option.textContent = industry;
@@ -237,7 +237,7 @@
 
             // Populate provinces
             const provinceSelect = document.getElementById('inputProvince');
-            window.RIAPMS.provinces.forEach(province => {
+            window.NearStage.provinces.forEach(province => {
                 const option = document.createElement('option');
                 option.value = province;
                 option.textContent = province;
@@ -249,7 +249,7 @@
                 const districtSelect = document.getElementById('inputDistrict');
                 districtSelect.innerHTML = '<option value="">Select district</option>';
 
-                const districts = window.RIAPMS.districtsByProvince[this.value] || [];
+                const districts = window.NearStage.districtsByProvince[this.value] || [];
                 districts.forEach(district => {
                     const option = document.createElement('option');
                     option.value = district;
@@ -276,20 +276,20 @@
             };
 
             try {
-                await window.RIAPMS.apiCall('/auth/company/profile', 'PUT', formData);
+                await window.NearStage.apiCall('/auth/company/profile', 'PUT', formData);
 
                 // Update local storage
-                const user = window.RIAPMS.getUser();
+                const user = window.NearStage.getUser();
                 Object.assign(user, formData);
-                window.RIAPMS.setUser(user);
+                window.NearStage.setUser(user);
 
-                window.RIAPMS.showToast('Profile updated successfully', 'success');
+                window.NearStage.showToast('Profile updated successfully', 'success');
 
                 // Refresh page to update UI
                 setTimeout(() => window.location.reload(), 1000);
             } catch (error) {
                 console.error('Error updating profile:', error);
-                window.RIAPMS.showToast('Failed to update profile', 'error');
+                window.NearStage.showToast('Failed to update profile', 'error');
             }
         });
     </script>

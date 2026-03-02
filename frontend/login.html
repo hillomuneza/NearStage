@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#2563eb">
-  <title>Login - RIAPMS</title>
+  <title>Login - NearStage</title>
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
@@ -26,7 +26,7 @@
     <div class="auth-header">
       <i class="fas fa-sign-in-alt"></i>
       <h2>Welcome Back</h2>
-      <p>Login to your RIAPMS account</p>
+      <p>Login to your NearStage account</p>
     </div>
     <div class="auth-body">
       <!-- Role Selection -->
@@ -124,12 +124,12 @@
 
       try {
         const endpoint = role === 'admin' ? '/admin/login' : `/${role}/login`;
-        const result = await window.RIAPMS.apiCall(`/auth${endpoint}`, 'POST', { email, password });
+        const result = await window.NearStage.apiCall(`/auth${endpoint}`, 'POST', { email, password });
 
-        window.RIAPMS.setToken(result.token);
-        window.RIAPMS.setUser(result.user);
+        window.NearStage.setToken(result.token);
+        window.NearStage.setUser(result.user);
 
-        window.RIAPMS.showToast('Login successful! Redirecting...');
+        window.NearStage.showToast('Login successful! Redirecting...');
 
         // Redirect based on actual user role from API response
         const userRole = result.user.role || role;
@@ -144,7 +144,7 @@
         }, 1000);
 
       } catch (error) {
-        window.RIAPMS.showToast(error.message, 'error');
+        window.NearStage.showToast(error.message, 'error');
       } finally {
         loginBtn.disabled = false;
         spinner.classList.add('d-none');

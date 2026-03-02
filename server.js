@@ -29,13 +29,13 @@ app.use('/api/admin', adminRoutes);
 app.get('/api/health', (req, res) => {
     res.json({
         status: 'ok',
-        message: 'RIAPMS API is running',
+        message: 'NearStage API is running',
         timestamp: new Date().toISOString()
     });
 });
 
 // MongoDB Connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/riapms';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/nearstage';
 
 mongoose.connect(MONGODB_URI)
     .then(() => {
@@ -53,17 +53,17 @@ const Admin = require('./backend/models/Admin');
 
 const seedAdmin = async () => {
     try {
-        const adminExists = await Admin.findOne({ email: 'admin@riapms.rw' });
+        const adminExists = await Admin.findOne({ email: 'admin@nearstage.rw' });
         if (!adminExists) {
             const admin = new Admin({
                 name: 'Super Admin',
-                email: 'admin@riapms.rw',
+                email: 'admin@nearstage.rw',
                 password: 'admin123',
                 role: 'super_admin',
                 phone: '+250788000000'
             });
             await admin.save();
-            console.log('✅ Admin account created: admin@riapms.rw / admin123');
+            console.log('✅ Admin account created: admin@nearstage.rw / admin123');
         }
     } catch (error) {
         console.error('Error seeding admin:', error);
@@ -97,7 +97,7 @@ exports.api = functions.https.onRequest(app);
 // Start server locally (if not running as a function)
 if (process.env.NODE_ENV !== 'production' || !process.env.FIREBASE_CONFIG) {
     app.listen(PORT, () => {
-        console.log(`🚀 RIAPMS Server running on port ${PORT}`);
+        console.log(`🚀 NearStage Server running on port ${PORT}`);
         console.log(`📱 API available at http://localhost:${PORT}/api`);
     });
 }

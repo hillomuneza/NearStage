@@ -1,4 +1,4 @@
-// RIAPMS Main JavaScript
+// NearStage Main JavaScript
 
 // API Base URL
 const API_URL = '/api';
@@ -282,7 +282,7 @@ const skillsList = [
 ];
 
 // Export functions for use in other files
-window.RIAPMS = {
+window.NearStage = {
     apiCall,
     getToken,
     setToken,

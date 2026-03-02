@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2563eb">
-    <title>Company Dashboard - RIAPMS</title>
+    <title>Company Dashboard - NearStage</title>
 
     <!-- PWA -->
     <link rel="manifest" href="../manifest.json">
@@ -27,7 +27,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
         <div class="container">
             <a class="navbar-brand" href="../index.html">
-                <i class="fas fa-graduation-cap me-2"></i>RIAPMS
+                <i class="fas fa-graduation-cap me-2"></i>NearStage
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -67,7 +67,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#" onclick="window.RIAPMS.logout(); return false;"><i
+                                <li><a class="dropdown-item" href="#" onclick="window.NearStage.logout(); return false;"><i
                                             class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
                             </ul>
                         </div>
@@ -151,18 +151,18 @@
     <script src="../js/main.js"></script>
 
     <script>
-        if (!window.RIAPMS.requireAuth()) { }
+        if (!window.NearStage.requireAuth()) { }
 
-        const user = window.RIAPMS.getUser();
+        const user = window.NearStage.getUser();
         if (user) {
-            document.getElementById('userInitials').textContent = window.RIAPMS.getInitials(user.companyName || 'Company');
+            document.getElementById('userInitials').textContent = window.NearStage.getInitials(user.companyName || 'Company');
             document.getElementById('userName').textContent = user.companyName || 'Company';
             document.getElementById('welcomeName').textContent = user.companyName || 'Company';
         }
 
         async function loadDashboard() {
             try {
-                const internships = await window.RIAPMS.apiCall('/internships/company/internships');
+                const internships = await window.NearStage.apiCall('/internships/company/internships');
 
                 document.getElementById('totalPosts').textContent = internships.length;
 
@@ -172,7 +172,7 @@
                 // Get latest applicants from all internships
                 let allApplicants = [];
                 for (const internship of internships.slice(0, 3)) {
-                    const applicants = await window.RIAPMS.apiCall(`/internships/company/internship/${internship._id}/applicants`);
+                    const applicants = await window.NearStage.apiCall(`/internships/company/internship/${internship._id}/applicants`);
                     totalApplicants += applicants.length;
                     acceptedApplicants += applicants.filter(a => a.status === 'accepted').length;
 

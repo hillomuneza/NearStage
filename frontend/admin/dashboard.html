@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2563eb">
-    <title>Admin Dashboard - RIAPMS</title>
+    <title>Admin Dashboard - NearStage</title>
 
     <!-- PWA -->
     <link rel="manifest" href="../manifest.json">
@@ -27,7 +27,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
         <div class="container">
             <a class="navbar-brand" href="../index.html">
-                <i class="fas fa-graduation-cap me-2"></i>RIAPMS Admin
+                <i class="fas fa-graduation-cap me-2"></i>NearStage Admin
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -70,7 +70,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#" onclick="window.RIAPMS.logout(); return false;"><i
+                                <li><a class="dropdown-item" href="#" onclick="window.NearStage.logout(); return false;"><i
                                             class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
                             </ul>
                         </div>
@@ -88,7 +88,7 @@
                 <div class="col-12">
                     <div class="dashboard-card">
                         <h3><i class="fas fa-chart-line me-2"></i>System Overview</h3>
-                        <p class="text-muted mb-0">Monitor and manage the RIAPMS platform</p>
+                        <p class="text-muted mb-0">Monitor and manage the NearStage platform</p>
                     </div>
                 </div>
             </div>
@@ -207,17 +207,17 @@
     <script src="../js/main.js"></script>
 
     <script>
-        if (!window.RIAPMS.requireAuth()) { }
+        if (!window.NearStage.requireAuth()) { }
 
-        const user = window.RIAPMS.getUser();
+        const user = window.NearStage.getUser();
         if (user) {
-            document.getElementById('userInitials').textContent = window.RIAPMS.getInitials(user.name || 'Admin');
+            document.getElementById('userInitials').textContent = window.NearStage.getInitials(user.name || 'Admin');
             document.getElementById('userName').textContent = user.name || 'Admin';
         }
 
         async function loadDashboard() {
             try {
-                const stats = await window.RIAPMS.apiCall('/admin/statistics');
+                const stats = await window.NearStage.apiCall('/admin/statistics');
 
                 document.getElementById('totalStudents').textContent = stats.totalStudents || 0;
                 document.getElementById('totalCompanies').textContent = stats.totalCompanies || 0;
@@ -229,7 +229,7 @@
                 document.getElementById('placementRate').textContent = stats.placementRate + '%';
 
                 // Load pending companies
-                const companies = await window.RIAPMS.apiCall('/admin/companies?approved=false');
+                const companies = await window.NearStage.apiCall('/admin/companies?approved=false');
                 const pendingContainer = document.getElementById('pendingCompaniesList');
 
                 if (companies.length === 0) {
@@ -270,22 +270,22 @@
         async function approveCompany(id) {
             if (!confirm('Approve this company?')) return;
             try {
-                await window.RIAPMS.apiCall(`/admin/company/${id}/approve`, 'PUT');
-                window.RIAPMS.showToast('Company approved!');
+                await window.NearStage.apiCall(`/admin/company/${id}/approve`, 'PUT');
+                window.NearStage.showToast('Company approved!');
                 loadDashboard();
             } catch (error) {
-                window.RIAPMS.showToast(error.message, 'error');
+                window.NearStage.showToast(error.message, 'error');
             }
         }
 
         async function rejectCompany(id) {
             if (!confirm('Reject and deactivate this company?')) return;
             try {
-                await window.RIAPMS.apiCall(`/admin/company/${id}/reject`, 'PUT');
-                window.RIAPMS.showToast('Company rejected!');
+                await window.NearStage.apiCall(`/admin/company/${id}/reject`, 'PUT');
+                window.NearStage.showToast('Company rejected!');
                 loadDashboard();
             } catch (error) {
-                window.RIAPMS.showToast(error.message, 'error');
+                window.NearStage.showToast(error.message, 'error');
             }
         }
 

@@ -1,6 +1,6 @@
 {
-    "name": "RIAPMS - Rwanda Internship & Placement System",
-    "short_name": "RIAPMS",
+    "name": "NearStage - Professional Internship & Placement System",
+    "short_name": "NearStage",
     "description": "Find internships and job placements in Rwanda based on location, field, and skills",
     "start_url": "/",
     "display": "standalone",

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2563eb">
-    <title>Post Internship - RIAPMS</title>
+    <title>Post Internship - NearStage</title>
 
     <!-- PWA -->
     <link rel="manifest" href="../manifest.json">
@@ -27,7 +27,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
         <div class="container">
             <a class="navbar-brand" href="../index.html">
-                <i class="fas fa-graduation-cap me-2"></i>RIAPMS
+                <i class="fas fa-graduation-cap me-2"></i>NearStage
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -67,7 +67,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#" onclick="window.RIAPMS.logout(); return false;"><i
+                                <li><a class="dropdown-item" href="#" onclick="window.NearStage.logout(); return false;"><i
                                             class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
                             </ul>
                         </div>
@@ -219,12 +219,12 @@
         let skills = [];
 
         // Check authentication
-        if (!window.RIAPMS.requireAuth()) { }
+        if (!window.NearStage.requireAuth()) { }
 
         // Load user data
-        const user = window.RIAPMS.getUser();
+        const user = window.NearStage.getUser();
         if (user) {
-            document.getElementById('userInitials').textContent = window.RIAPMS.getInitials(user.companyName || 'Company');
+            document.getElementById('userInitials').textContent = window.NearStage.getInitials(user.companyName || 'Company');
             document.getElementById('userName').textContent = user.companyName || 'Company';
         }
 
@@ -236,7 +236,7 @@
         function populateFields() {
             // Populate fields of study
             const fieldSelect = document.getElementById('field');
-            window.RIAPMS.fieldsOfStudy.forEach(field => {
+            window.NearStage.fieldsOfStudy.forEach(field => {
                 const option = document.createElement('option');
                 option.value = field;
                 option.textContent = field;
@@ -245,7 +245,7 @@
 
             // Populate provinces
             const provinceSelect = document.getElementById('province');
-            window.RIAPMS.provinces.forEach(province => {
+            window.NearStage.provinces.forEach(province => {
                 const option = document.createElement('option');
                 option.value = province;
                 option.textContent = province;
@@ -257,7 +257,7 @@
                 const districtSelect = document.getElementById('district');
                 districtSelect.innerHTML = '<option value="">Select district</option>';
 
-                const districts = window.RIAPMS.districtsByProvince[this.value] || [];
+                const districts = window.NearStage.districtsByProvince[this.value] || [];
                 districts.forEach(district => {
                     const option = document.createElement('option');
                     option.value = district;
@@ -323,9 +323,9 @@
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Posting...';
 
             try {
-                await window.RIAPMS.apiCall('/internships/company/internship', 'POST', formData);
+                await window.NearStage.apiCall('/internships/company/internship', 'POST', formData);
 
-                window.RIAPMS.showToast('Internship posted successfully!', 'success');
+                window.NearStage.showToast('Internship posted successfully!', 'success');
 
                 // Redirect to my internships
                 setTimeout(() => {
@@ -333,7 +333,7 @@
                 }, 1500);
             } catch (error) {
                 console.error('Error posting internship:', error);
-                window.RIAPMS.showToast(error.message || 'Failed to post internship', 'error');
+                window.NearStage.showToast(error.message || 'Failed to post internship', 'error');
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Post Internship';
             }

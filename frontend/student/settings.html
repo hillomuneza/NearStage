@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2563eb">
-    <title>Settings - RIAPMS</title>
+    <title>Settings - NearStage</title>
 
     <!-- PWA -->
     <link rel="manifest" href="../manifest.json">
@@ -27,7 +27,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
         <div class="container">
             <a class="navbar-brand" href="../index.html">
-                <i class="fas fa-graduation-cap me-2"></i>RIAPMS
+                <i class="fas fa-graduation-cap me-2"></i>NearStage
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -67,7 +67,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#" onclick="window.RIAPMS.logout(); return false;"><i
+                                <li><a class="dropdown-item" href="#" onclick="window.NearStage.logout(); return false;"><i
                                             class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
                             </ul>
                         </div>
@@ -223,16 +223,16 @@
 
     <script>
         // Check authentication
-        if (!window.RIAPMS.requireAuth()) { }
+        if (!window.NearStage.requireAuth()) { }
 
         // Load user data
-        const user = window.RIAPMS.getUser();
+        const user = window.NearStage.getUser();
         if (user) {
-            document.getElementById('userInitials').textContent = window.RIAPMS.getInitials(user.name || 'Student');
+            document.getElementById('userInitials').textContent = window.NearStage.getInitials(user.name || 'Student');
             document.getElementById('userName').textContent = user.name || 'Student';
             document.getElementById('accountEmail').textContent = user.email || '-';
             if (user.createdAt) {
-                document.getElementById('memberSince').textContent = window.RIAPMS.formatDate(user.createdAt);
+                document.getElementById('memberSince').textContent = window.NearStage.formatDate(user.createdAt);
             }
         }
 
@@ -245,37 +245,37 @@
             const confirmPassword = document.getElementById('confirmPassword').value;
 
             if (newPassword !== confirmPassword) {
-                window.RIAPMS.showToast('New passwords do not match', 'error');
+                window.NearStage.showToast('New passwords do not match', 'error');
                 return;
             }
 
             if (newPassword.length < 6) {
-                window.RIAPMS.showToast('Password must be at least 6 characters', 'error');
+                window.NearStage.showToast('Password must be at least 6 characters', 'error');
                 return;
             }
 
             try {
                 // Note: This would need a backend endpoint for password change
-                window.RIAPMS.showToast('Password update functionality coming soon', 'info');
+                window.NearStage.showToast('Password update functionality coming soon', 'info');
 
                 // Clear form
                 document.getElementById('passwordForm').reset();
             } catch (error) {
                 console.error('Error updating password:', error);
-                window.RIAPMS.showToast('Failed to update password', 'error');
+                window.NearStage.showToast('Failed to update password', 'error');
             }
         });
 
         function confirmDeactivate() {
             if (confirm('Are you sure you want to deactivate your account? You can reactivate by logging in again.')) {
-                window.RIAPMS.showToast('Account deactivation coming soon', 'info');
+                window.NearStage.showToast('Account deactivation coming soon', 'info');
             }
         }
 
         function confirmDelete() {
             if (confirm('Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently lost.')) {
                 if (confirm('This is your final warning. All data will be permanently deleted. Continue?')) {
-                    window.RIAPMS.showToast('Account deletion coming soon', 'info');
+                    window.NearStage.showToast('Account deletion coming soon', 'info');
                 }
             }
         }
