@@ -134,6 +134,14 @@ function animateCounters() {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize Theme
+    const savedTheme = localStorage.getItem('nearstage_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    const themeIcon = document.querySelector('#themeToggle i');
+    if (themeIcon) {
+        themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+
     // Animate counters on home page
     if (document.querySelector('.counter')) {
         animateCounters();
@@ -292,6 +300,22 @@ const skillsList = [
     'Teaching'
 ];
 
+// Theme Management
+const setTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('nearstage_theme', theme);
+    const themeIcon = document.querySelector('#themeToggle i');
+    if (themeIcon) {
+        themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+};
+
+const toggleTheme = () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+};
+
 // Export functions for use in other files
 window.NearStage = {
     apiCall,
@@ -313,5 +337,7 @@ window.NearStage = {
     districtsByProvince,
     fieldsOfStudy,
     industries,
-    skillsList
+    skillsList,
+    setTheme,
+    toggleTheme
 };
