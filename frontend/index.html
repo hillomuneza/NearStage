@@ -67,7 +67,8 @@
     <!-- Hero Section with Video -->
     <section id="home" class="hero-section">
         <div class="hero-overlay"></div>
-        <video autoplay muted loop playsinline class="hero-video" id="heroVideo" poster="assets/hero-bg.jpg">
+        <video autoplay muted loop playsinline class="hero-video" id="heroVideo"
+            poster="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1920&q=80">
             <source
                 src="https://assets.mixkit.co/videos/preview/mixkit-people-working-in-a-modern-office-4939-large.mp4"
                 type="video/mp4">
@@ -414,6 +415,12 @@
         // Ensure autoplay works
         window.addEventListener('load', function () {
             if (heroVideo) {
+                // Add error handler for video load failure
+                heroVideo.onerror = function () {
+                    console.log('Video failed to load, using background image fallback');
+                    heroVideo.style.display = 'none';
+                };
+
                 heroVideo.play().catch(function (error) {
                     console.log('Autoplay was prevented:', error);
                     // Try to play on user interaction

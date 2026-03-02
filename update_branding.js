@@ -18,6 +18,8 @@ function replaceInDir(dir) {
                 console.log(`Updating branding in: ${filePath}`);
                 // Replace RIAPMS with NearStage
                 content = content.replace(/RIAPMS/g, 'NearStage');
+                // Replace riapms with nearstage
+                content = content.replace(/riapms/g, 'nearstage');
                 // Also handle the full name replacement if found
                 content = content.replace(/Rwanda Internship & Academic Placement Management System/g, 'NearStage - Professional Internship & Placement Management System');
                 fs.writeFileSync(filePath, content, 'utf8');

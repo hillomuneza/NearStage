@@ -1,7 +1,7 @@
 // NearStage Main JavaScript
 
 // API Base URL
-const API_URL = '/api';
+const API_URL = 'https://nearstage.com/api';
 
 // Store token
 const getToken = () => localStorage.getItem('riapms_token');

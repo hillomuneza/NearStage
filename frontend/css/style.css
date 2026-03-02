@@ -147,7 +147,8 @@ ul {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    /* Fallback background image in case video fails to load */
+    background: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1920&q=80') center/cover no-repeat;
 }
 
 .hero-video {
@@ -161,7 +162,8 @@ ul {
     transform: translate(-50%, -50%);
     object-fit: cover;
     z-index: -2;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    /* Fallback background in case video fails */
+    background: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1920&q=80') center/cover no-repeat;
 }
 
 .hero-overlay {
